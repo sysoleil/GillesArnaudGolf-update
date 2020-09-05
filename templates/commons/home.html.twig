@@ -1,0 +1,53 @@
+{% extends 'commons/base.html.twig' %}
+    {% block body %}
+        {% include 'commons/_header.html.twig' %}
+        <main>
+            <section class="sectionOneHomePage">
+                <img class="imgSectionOneHomePage" src="{{ asset('../public/img/portrait.jpg') }}">
+                <p class="pSectionOneHomePage">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi assumenda cum delectus, error id minima, molestiae nam nisi optio quia quod sequi sit tenetur! Earum eligendi impedit inventore iusto quaerat saepe voluptas. Assumenda consequuntur enim fugit inventore magnam nesciunt placeat possimus sequi, sit ut, voluptates, voluptatum. Aspernatur, at autem beatae eaque est expedita fugit. Amet aperiam ea incidunt, quaerat quos reprehenderit. Magni nihil repellat ullam.</p>
+            </section>
+            <section class="sectionHomePageCarousel">
+                <h1 class="titleHomePageCarousel">Mes cours</h1>
+                <div id="carousel">
+                    <figure id="spinner">
+                        <img class="imgSectionHomePageCarousel" src="{{ asset("img/golfeur.jpg") }}"/>
+                        <img class="imgSectionHomePageCarousel" src="{{ asset("img/paysage.jpeg") }}"/>
+                        <img class="imgSectionHomePageCarousel" src="{{ asset("img/stage2.jpeg") }}"/>
+                        <img class="imgSectionHomePageCarousel" src="{{ asset("img/vignes2.jpeg") }}"/>
+                        <img class="imgSectionHomePageCarousel" src="{{ asset("img/animation.jpeg") }}"/>
+                        <img class="imgSectionHomePageCarousel" src="{{ asset("img/carte_verte.jpg") }}"/>
+                        <img class="imgSectionHomePageCarousel" src="{{ asset("img/trackman.jpeg") }}"/>
+                        <img class="imgSectionHomePageCarousel" src="{{ asset("img/panorama.png") }}"/>
+                    </figure>
+                </div>
+                <span style="float:left" class="ss-icon" onclick="galleryspin('-')">&lt;</span>
+                <span style="float:right" class="ss-icon" onclick="galleryspin('')">&gt;</span>
+            </section>
+            <section class="sectionThreeHomePage">
+                <div>
+                    <h1 class="titlePlanning">Planning</h1>
+                    <img class="imgSectionThreeHomePage" src="{{ asset("img/balle.jpg") }}"/>
+                </div>
+                <div>
+                    <p class="pSectionThreeHomePage">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi assumenda cum delectus, error id minima, molestiae nam nisi optio quia quod sequi sit tenetur! Earum eligendi impedit inventore iusto quaerat saepe voluptas. Assumenda consequuntur enim fugit inventore magnam nesciunt placeat possimus sequi, sit ut, voluptates, voluptatum. Aspernatur, at autem beatae eaque est expedita fugit. Amet aperiam ea incidunt, quaerat quos reprehenderit. Magni nihil repellat ullam.</p>
+                </div>
+            </section>
+            <section class="sectionHomePageCarousel">
+                <h1 class="titleHomePageCarousel">Mes conseils</h1>
+                <div id="carousel2">
+                    <figure id="spinner2">
+                        <img class="imgSectionHomePageCarousel" src="{{ asset("img/putting.jpg") }}"/>
+                        <img class="imgSectionHomePageCarousel" src="{{ asset("img/vignes2.jpeg") }}"/>
+                        <img class="imgSectionHomePageCarousel" src="{{ asset("img/bunker.jpg") }}"/>
+                        <img class="imgSectionHomePageCarousel" src="{{ asset("img/driver.jpg") }}"/>
+                        <img class="imgSectionHomePageCarousel" src="{{ asset("img/mental.jpeg") }}"/>
+                        <img class="imgSectionHomePageCarousel" src="{{ asset("img/chateaux.jpeg") }}"/>
+                        <img class="imgSectionHomePageCarousel" src="{{ asset("img/approches.jpg") }}"/>
+                        <img class="imgSectionHomePageCarousel" src="{{ asset("img/conseils.jpeg") }}"/>
+                    </figure>
+                </div>
+                <span style="float:left" class="ss-icon" onclick="galleryspin2('-')">&lt;</span>
+                <span style="float:right" class="ss-icon" onclick="galleryspin2('')">&gt;</span>
+            </section>
+        </main>
+    {% endblock %}

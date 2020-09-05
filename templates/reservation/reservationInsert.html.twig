@@ -1,0 +1,61 @@
+{% extends 'commons/base.html.twig' %}
+{% block title %}reservation{% endblock %}
+    {% block body %}
+        {% include 'commons/_headerLittle.html.twig' %}
+        <h1 class="titleCourse">Faire une réservation</h1>
+
+        {#  J'utilise ->  {{ form(reservationForm) }}  ou pour pouvoir styliser
+je détaille comme ci-dessous   #}
+        <div class="formulaire">
+
+            {{ form_start(reservationForm) }}
+
+            <div> {{ form_label(reservationForm.dateCourse) }}
+                {{ form_widget(reservationForm.dateCourse, {'attr': {'class':'input_date'}}) }}
+                {{ form_errors(reservationForm.dateCourse) }}
+            </div>
+            {# je crée un label issu du formulaire 'reservationForm' je crée un 'widget' ou input
+            et lui attribue une class
+
+            Ensuite je fais une classe dans le CSS #}
+
+            {#  J'active l'affichage des erreurs avec 'form_errors'
+
+            Ensuite je vais dans mon entité Constraints auquel je mets l'alias Assert
+            dans la base de symfony dans mon Entité course
+
+            Ensuite je créé @Assert et je mets la contrainte que je souhaite afficher #}
+
+            <div> {{ form_label(reservationForm.datePurchase) }}<br>
+                {{ form_widget(reservationForm.datePurchase, {'attr': {'class':'input_date'}}) }}
+                {{ form_errors(reservationForm.datePurchase) }}
+            </div>
+            <div> {{ form_label(reservationForm.price) }}<br>
+                {{ form_widget(reservationForm.price, {'attr': {'class':'inputPrice'}}) }}
+                {{ form_errors(reservationForm.price) }}
+            </div>
+            {# {% if is_granted("ROLE_CE") %}
+            <div>
+                {{ form_label(reservationForm.price) }}<br>
+                {{ form_widget(reservationForm.price, {'attr': {'class': 'inputPrice'}}) }}
+                {{ form_errors(reservationForm.price) }}
+            </div>
+            {# {% endif %} #}
+            <div>
+                {{ form_label(reservationForm.hourStart) }}<br>
+                {{ form_widget(reservationForm.hourStart, {'attr': {'class': 'input_hour'}}) }}
+                {{ form_errors(reservationForm.hourStart)}}
+            </div>
+
+            <div>
+                {{ form_label(reservationForm.hourEnd) }}
+                {{ form_widget(reservationForm.hourEnd, {'attr': {'class': 'input_hour'}}) }}
+                {{ form_errors(reservationForm.hourEnd) }}
+            </div>
+            <div> {{ form_label(reservationForm.submit) }}
+                {{ form_widget(reservationForm.submit, {'attr': {'class':'inputSubmit'}}) }}</div>
+
+            {{ form_end(reservationForm) }}
+        </div>
+        <button class="backCenter"><a href="{{ path('reervation') }}">Retour à l'accueil</a></button>
+    {% endblock %}

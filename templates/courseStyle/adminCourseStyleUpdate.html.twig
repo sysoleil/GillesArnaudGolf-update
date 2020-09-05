@@ -1,0 +1,35 @@
+{% extends 'commons/base.html.twig' %}
+{% block title %}modification catégorie{% endblock %}
+    {% block body %}
+        {% include 'commons/_headerLittle.html.twig' %}
+        <h1 class="titleCourse"> Modifier une catégorie de cours</h1>
+
+        {#  J'utilise ->  {{ form(courseStyle) }}  ou pour pouvoir styliser
+je détaille comme ci-dessous   #}
+        <div class="formulaire">
+
+            {{ form_start(courseStyleForm) }}
+
+            <div> {{ form_label(courseStyleForm.name) }}
+                {{ form_widget(courseStyleForm.name, {'attr': {'class':'input_title'}}) }}
+                {{ form_errors(courseStyleForm)}}
+            </div>
+            {# je crée un label issu du formulaire 'courseStyleForm' je crée un 'widget' ou input
+            et lui attribue une class
+
+            Ensuite je fais une classe dans le CSS #}
+
+            {#  J'active l'affichage des erreurs avec 'form_errors'
+
+            Ensuite je vais dans mon entité Constraints auquel je mets l'alias Assert
+            dans la base de symfony dans mon Entité course
+
+            Ensuite je créé @Assert et je mets la contrainte que je souhaite afficher #}
+
+            <div> {{ form_label(courseStyleForm.submit) }}
+                {{ form_widget(courseStyleForm.submit, {'attr': {'class':'inputSubmit'}}) }}</div>
+
+            {{ form_end(courseStyleForm) }}
+        </div>
+        <button class="backCenter"><a href="{{ path('home') }}">Retour à l'accueil</a></button>
+    {% endblock %}

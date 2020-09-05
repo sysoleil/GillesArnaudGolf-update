@@ -1,0 +1,45 @@
+{% extends 'commons/base.html.twig' %}
+{% block title %}Création catégorie{% endblock %}
+    {% block body %}
+        {% include 'commons/_headerLittle.html.twig' %}
+        <h1 class="courseTitle"> Créer une nouvelle catégorie de cours</h1>
+        <div>
+            {{ form(courseStyleForm) }} #}
+
+            {# Pour décomposer mon formulaire j'utilise les fonctions form_start() et form_end.
+            qui balisent mon formulaire. Ensuite en fonction des champs j'utilise form_widget() et form_label().
+            Pour le second argument, j'utilise ensuite l'objet 'attr' pour gérer les classes de mes inputs
+            #}
+
+            {#     <div class="formulaireCourse">
+
+                  {{ form_start(courseStyle) }}
+
+                  <div> {{ form_label(courseStyle.name) }}
+                      {{ form_widget(courseStyle.name, {'attr': {'class':'inputTitle'}}) }}
+                      {{ form_errors(courseStyle)}}
+                  </div>
+                  {# je crée un label issu du formulaire 'courseStyle' je crée un 'widget' ou input
+                  et lui attribue une class
+
+                  Ensuite je fais une classe dans le CSS #}
+
+            {#  J'active l'affichage des erreurs avec 'form_errors'
+
+            Ensuite je vais dans mon entité Constraints auquel je mets l'alias Assert
+            dans la base de symfony dans mon Entité course
+
+            Ensuite je créé @Assert et je mets la contrainte que je souhaite afficher #}
+
+            <div> {{ form_label(courseStyleForm.submit) }}
+                {{ form_widget(courseStyleForm.submit, {'attr': {'class':'inputSubmit'}}) }}</div>
+
+            {{ form_end(courseStyleForm) }}
+        </div>
+        {% for message in app.flashes('info') %}
+            <div class="flashInfo">
+                {{ message }}
+            </div>
+        {% endfor %}
+        <button class="backCenter"><a href="{{ path('home') }}">Retour à l'accueil</a></button>
+    {% endblock %}

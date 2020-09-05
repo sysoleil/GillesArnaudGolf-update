@@ -1,0 +1,33 @@
+//---------------------------------------- GENERAL  DIVERS  ------------------------------------------
+.textOnB{
+  font-size: $fs20;
+  color: $green;
+}
+.flashInfo{
+  color: $blue;
+  font-size: $fs35;
+}
+//---------------------------------------- COURSES  FORMULAIRE  ------------------------------------------
+//.courseForm {
+//  display: flex;
+//  flex-direction: column;
+//  width: 60%;
+//  margin: auto;
+//  text-align: left;
+//}
+.formulaireCourse{
+  width: 50%;
+  text-align: left;
+  margin: 4% auto;
+  font-size: $fs20;
+  color: $blue;
+}
+//---------------------------------------- USER FORMULAIRE  ------------------------------------------
+.formulaireUser{
+  width: 80%;
+  text-align: left;
+  margin: 4% auto;
+  font: $fontH;
+  color: $blue;
+  border-color: $red;
+}

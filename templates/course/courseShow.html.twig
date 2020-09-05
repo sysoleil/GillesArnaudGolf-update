@@ -1,0 +1,44 @@
+{% extends 'commons/base.html.twig' %}
+    {% block body %}
+        {% include 'commons/_headerLittle.html.twig' %}
+        <main class="courseMain">
+            <div class="courseShowDisplay">
+                <img class="courseShowPhoto" src="{{ asset('upload_directory/' ~ course.photo) }}" alt="{{ course.alt }}" name="{{ course.alt }}">
+                <div class="courseShowContainer">
+                    <h1>{{ course.name }}</h1>
+                    <p class="courseShowP">
+                        {{ course.description }}
+                    </p>
+                    <p class="courseShowP">
+                        {% if is_granted("ROLE_CE") %}
+                            Prix: {{ course.priceCe }}€
+                            {% if course.ticket > 0 %}
+                                ou {{ course.ticket }} ticket(s)
+                            {% endif %}
+                        {% elseif is_granted("ROLE_ADMIN") %}
+                            Prix CE: {{ course.priceCe }}€
+                            Prix: {{ course.price }}€
+                            {% if course.ticket > 0 %}
+                                ou {{ course.ticket }} ticket(s)
+                            {% endif %}
+                        {% else %}
+                            Prix: {{ course.price }}€
+                            {% if course.ticket > 0 %}
+                                ou {{ course.ticket }} ticket(s)
+                            {% endif %}
+                        {% endif %}
+                    </p>
+                    <p class="courseShowP">
+                        De {{ course.minPerson }} a {{ course.maxPerson }} participants.
+                    </p>
+                    <p class="courseShowP">
+                        Durée: {{ course.duration }}
+                    </p>
+                    <div class="courseShowButton">
+                        <a class="button" href="">Reserver</a>
+                    </div>
+                    <a class="button buttonLeft" href="{{ path('home') }}">Retour à l'accueil</a>
+                </div>
+            </div>
+        </main>
+    {% endblock %}

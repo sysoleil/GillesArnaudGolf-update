@@ -1,0 +1,20 @@
+{% extends 'commons/base.html.twig' %}
+    {% block body %}
+        {% include 'commons/_headerLittle.html.twig' %}
+        <main class="ticketMain">
+            <div class="ticketShowDisplay">
+                <div class="ticketShowContainer">
+                    {% for courseStyle in courseStyle %}
+                        <div class="ticketBox">
+                            <h1>{{ courseStyle.name }}</h1>
+                            <div class="buttonCenter">
+                                <a class="button buttonDelete" href="{{ path('course_style',{'id':courseStyle.id}) }}">supprimer</a>
+                                <a class="button" href="{{ path('course_style_update',{'id':courseStyle.id}) }}">modifier</a>
+                            </div>
+                        </div>
+                    {% endfor %}
+                    <a class="button buttonLeft" href="{{ path('course') }}">Les cours</a>
+                </div>
+            </div>
+        </main>
+    {% endblock %}

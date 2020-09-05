@@ -1,0 +1,87 @@
+{% extends 'commons/base.html.twig' %}
+{% block title %}Création cours{% endblock %}
+    {% block body %}
+        {% include 'commons/_headerLittle.html.twig' %}
+        <h1 class="courseTitle"> Enregistrer un cours</h1>
+        {#       <div>
+                    {{ form(courseForm) }} #}
+
+        {# Pour décomposer mon formulaire j'utilise les fonctions form_start() et form_end.
+        qui balisent mon formulaire. Ensuite en fonction des champs j'utilise form_widget() et form_label().
+        Pour le second argument, j'utilise ensuite l'objet 'attr' pour gérer les classes de mes inputs
+        #}
+
+        <div class="formulaireCourse">
+
+            {{ form_start(courseForm,{'attr':{'class': 'courseForm'}}) }}
+
+            <div> {{ form_label(courseForm.name) }}
+                {{ form_widget(courseForm.name, {'attr': {'class':'inputTitle'}}) }}
+                {{ form_errors(courseForm)}}
+            </div>
+            {# je crée un label issu du formulaire 'courseForm' je crée un 'widget' ou input
+            et lui attribue une class
+
+            Ensuite je fais une classe dans le CSS #}
+
+            {#  J'active l'affichage des erreurs avec 'form_errors'
+
+            Ensuite je vais dans mon entité Constraints auquel je mets l'alias Assert
+            dans la base de symfony dans mon Entité course
+
+            Ensuite je créé @Assert et je mets la contrainte que je souhaite afficher #}
+
+            <div> {{ form_label(courseForm.description) }}<br>
+                {{ form_widget(courseForm.description, {'attr': {'class':'inputDescription'}}) }}
+            </div>
+            <div> {{ form_label(courseForm.price) }}<br>
+                {{ form_widget(courseForm.price, {'attr': {'class':'inputPrice'}}) }}</div>
+            <div>
+                {{ form_label(courseForm.minPerson) }}
+                {{ form_widget(courseForm.minPerson, {'attr': {'class': 'inputMinPerson'}}) }}
+                {{ form_errors(courseForm.minPerson)}}
+            </div>
+            <div>
+                {{ form_label(courseForm.maxPerson) }}
+                {{ form_widget(courseForm.maxPerson, {'attr': {'class': 'inputMaxPerson'}}) }}
+                {{ form_errors(courseForm.maxPerson)}}
+            </div>
+            {# {% if is_granted("ROLE_CE") %} #}
+            <div>
+                {{ form_label(courseForm.priceCe) }}
+                {{ form_widget(courseForm.priceCe, {'attr': {'class': 'inputPriceCe'}}) }}
+                {{ form_errors(courseForm.priceCe)}}
+            </div>
+            {# {% endif %} #}
+            <div>
+                {{ form_label(courseForm.duration) }}
+                {{ form_widget(courseForm.duration, {'attr': {'class': 'inputDuration'}}) }}
+                {{ form_errors(courseForm.duration)}}
+            </div>
+            <div>
+                {{ form_label(courseForm.ticket) }}
+                {{ form_widget(courseForm.ticket, {'attr': {'class': 'inputTicket'}}) }}
+                {{ form_errors(courseForm.ticket)}}
+            </div>
+            <div>
+                {{ form_label(courseForm.photo) }}
+                {{ form_widget(courseForm.photo, {'attr': {'class': 'inputPhoto'}}) }}
+                {{ form_errors(courseForm.photo)}}
+            </div>
+            <div>
+                {{ form_label(courseForm.alt) }}
+                {{ form_widget(courseForm.alt, {'attr': {'class': 'inputAlt'}}) }}
+                {{ form_errors(courseForm.alt)}}
+            </div>
+            <div> {{ form_label(courseForm.submit) }}
+                {{ form_widget(courseForm.submit, {'attr': {'class':'inputSubmit'}}) }}</div>
+
+            {{ form_end(courseForm) }}
+        </div>
+        {% for message in app.flashes('info') %}
+            <div class="flashInfo">
+                {{ message }}
+            </div>
+        {% endfor %}
+        <button class="backCenter"><a href="{{ path('home') }}">Retour à l'accueil</a></button>
+    {% endblock %}

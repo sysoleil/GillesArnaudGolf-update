@@ -1,0 +1,23 @@
+{% extends 'commons/base.html.twig' %}
+    {% block body %}
+        {% include 'commons/_headerLittle.html.twig' %}
+        <main class="ticketMain">
+            <div class="ticketShowDisplay">
+                <div class="ticketShowContainer">
+                    {% for ticketBook in ticketBook %}
+                        <div class="ticketBox">
+                            <h1>{{ ticketBook.name }}</h1>
+                            <p class="ticketShowP"> Nombre d'unités : {{ ticketBook.duration }}</p>
+                            <p class="ticketShowP"> Prix total de : {{ ticketBook.price }} €</p>
+                            <div class="buttonCenter">
+                                <a class="buttonDelete" href="{{ path('ticket_book_show',{'id':ticketBook.id}) }}">supprimer</a>
+                                <a class="button" href="{{ path('ticket_book_update',{'id':ticketBook.id}) }}">modifier</a>
+                                <a class="button" href="">cours acheté</a>
+                            </div>
+                        </div>
+                    {% endfor %}
+                    <a class="button buttonLeft" href="{{ path('ticket_book_show') }}">Les carnets</a>
+                </div>
+            </div>
+        </main>
+    {% endblock %}

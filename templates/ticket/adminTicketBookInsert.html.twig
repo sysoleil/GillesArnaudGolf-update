@@ -1,0 +1,51 @@
+{% extends 'commons/base.html.twig' %}
+{% block title %}Création CARNET{% endblock %}
+    {% block body %}
+        {% include 'commons/_headerLittle.html.twig' %}
+        <h1 class="courseTitle"> Enregistrer un type de CARNET</h1>
+        {#       <div>
+                    {{ form(courseForm) }} #}
+
+        {# Pour décomposer mon formulaire j'utilise les fonctions form_start() et form_end.
+        qui balisent mon formulaire. Ensuite en fonction des champs j'utilise form_widget() et form_label().
+        Pour le second argument, j'utilise ensuite l'objet 'attr' pour gérer les classes de mes inputs
+        #}
+
+        <div class="formulaireCourse">
+
+            {{ form_start(ticketBookForm) }}
+
+            <div> {{ form_label(ticketBookForm.name) }}
+                {{ form_widget(ticketBookForm.name, {'attr': {'class':'inputTitle'}}) }}
+                {{ form_errors(ticketBookForm)}}
+            </div>
+            {# je crée un label issu du formulaire 'ticketBookForm' je crée un 'widget' ou input
+            et lui attribue une class
+
+            Ensuite je fais une classe dans le CSS #}
+
+            {#  J'active l'affichage des erreurs avec 'form_errors'
+
+            Ensuite je vais dans mon entité Constraints auquel je mets l'alias Assert
+            dans la base de symfony dans mon Entité ticketBook
+
+            Ensuite je créé @Assert et je mets la contrainte que je souhaite afficher #}
+
+            <div> {{ form_label(ticketBookForm.duration) }}<br>
+                {{ form_widget(ticketBookForm.duration, {'attr': {'class':'inputDuration'}}) }}
+            </div>
+            <div> {{ form_label(ticketBookForm.price) }}<br>
+                {{ form_widget(ticketBookForm.price, {'attr': {'class':'inputPrice'}}) }}</div>
+
+            <div> {{ form_label(ticketBookForm.submit) }}
+                {{ form_widget(ticketBookForm.submit, {'attr': {'class':'inputSubmit'}}) }}</div>
+
+            {{ form_end(ticketBookForm) }}
+        </div>
+        {% for message in app.flashes('info') %}
+            <div class="flashInfo">
+                {{ message }}
+            </div>
+        {% endfor %}
+        <button class="backCenter"><a href="{{ path('home') }}">Retour à l'accueil</a></button>
+    {% endblock %}
