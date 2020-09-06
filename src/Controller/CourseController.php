@@ -9,6 +9,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 
 class CourseController extends AbstractController
@@ -115,9 +116,14 @@ class CourseController extends AbstractController
             //Je prends les données de ma requête et je les envois au formulaire
             if ($courseForm->isSubmitted() && $courseForm->isValid()) {
                 $file = $courseForm->get('photo')->getData();
+                // vu que le champs photo de mon formulaire est en mapped false
+                // je gère moi même l'enregistrment de la valeur de cet input
+                // j'ai au préalable indiqué le paramètre de mon upload dans mon services.yaml
+                // je récupère l'image uploadée
                 $filePhoto = md5(uniqid()).'.'.$file->guessExtension();
                 // je crée un numéro unique que je concatène avec l'extension de mon fichier uploadé
-                $file->move($this->getParameter('upload_directory'), $filePhoto);
+                $file->move(
+                    $this->getParameter('upload_directory'), $filePhoto);
                 //l’image uploadée est déplacée.
                 // Je crée le paramètre indiquant l'endroit où seront stockées mes images uploadées.
                 $course->setPhoto($filePhoto);

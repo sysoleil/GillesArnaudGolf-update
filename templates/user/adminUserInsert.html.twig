@@ -1,0 +1,92 @@
+{% extends 'commons/base.html.twig' %}
+{% block title %}Créer compte{% endblock %}
+    {% block body %}
+        {% include 'commons/_headerLittle.html.twig' %}
+        <h1 class="courseTitle"> Créer un compte</h1>
+
+        {# Pour décomposer mon formulaire j'utilise les fonctions form_start() et form_end.
+        qui balisent mon formulaire. Ensuite en fonction des champs j'utilise form_widget() et form_label().
+        Pour le second argument, j'utilise ensuite l'objet 'attr' pour gérer les classes de mes inputs
+        #}
+        <div>
+            {{ form(userForm) }}
+
+           <div class="formulaireUser">
+
+               {#         {{ form_start(userForm) }} #}
+                <div>
+                    {{ form_label(userForm.firstName) }}
+                    {{ form_widget(userForm.firstName, {'attr': {'class':'inputFirstName'}}) }}
+                 {  { form_errors(userForm)}}
+                </div>
+                     {# je crée un label issu du formulaire 'userForm' je crée un 'widget' ou input
+                     et lui attribue une class
+
+                     Ensuite je fais une classe dans le CSS #}
+
+            {#  J'active l'affichage des erreurs avec 'form_errors'
+
+            Ensuite je vrais créer dans mon créé @Assert et je mets la contrainte que je souhaite afficher #}
+
+               <div> {{ form_label(userForm.lastName) }}
+                    {{ form_widget(userForm.lastName, {'attr': {'class':'inputLastName'}}) }}
+                    {{ form_errors(userForm)}}
+                </div>
+                <div>
+                    {{ form_label(userForm.dateBirth) }}
+                    {{ form_widget(userForm.dateBirth, {'attr': {'class': 'inputDateBirth'}}) }}
+                    {{ form_errors(userForm.dateBirth)}}
+                </div>
+                <div>
+                    {{ form_label(userForm.genre) }}
+                    {{ form_widget(userForm.genre, {'attr': {'class': 'inputGenre'}}) }}
+                </div>
+                <div>
+                    {{ form_label(userForm.phone) }}
+                    {{ form_widget(userForm.phone, {'attr': {'class': 'inputPhone'}}) }}
+                    {{ form_errors(userForm.phone)}}
+                </div>
+                <div>
+                    {{ form_label(userForm.email) }}
+                    {{ form_widget(userForm.email, {'attr': {'class': 'inputEmail'}}) }}
+                    {{ form_errors(userForm.email)}}
+                </div>
+                <div>
+                    {{ form_label(userForm.level) }}
+                    {{ form_widget(userForm.level, {'attr': {'class':'inputLevel'}}) }}
+                </div>
+                <div>
+                    {{ form_label(userForm.club) }}
+                    {{ form_widget(userForm.club, {'attr': {'class': 'inputClub'}}) }}
+                    {{ form_errors(userForm.club)}}
+                </div>
+                <div>
+                    {{ form_label(userForm.password) }}
+                    {{ form_widget(userForm.password, {'attr': {'class': 'inputPassword'}}) }}
+                    {{ form_errors(userForm.password)}}
+                </div>
+                <div>
+                    {{ form_label(userForm.role) }}
+                    {{ form_widget(userForm.role, {'attr': {'class': 'inputRole'}}) }}
+                    {{ form_errors(userForm.role)}}
+                </div>
+                {# {% if is_granted("ROLE_ADMIN") %} #}
+            {#    <div>
+                    {{ form_label(userForm.creditDuration) }}
+                    {{ form_widget(userForm.creditDuration, {'attr': {'class': 'inputCreditDuration'}}) }}
+                </div>
+                {# {% endif %} #}
+            </div>
+            <div> {{ form_label(userForm.submit) }}
+                {{ form_widget(userForm.submit, {'attr': {'class':'inputSubmit'}}) }}
+            </div>
+
+            {{ form_end(userForm) }}
+        </div>
+        {% for message in app.flashes('info') %}
+            <div class="flashInfo">
+                {{ message }}
+            </div>
+        {% endfor %}
+        <button class="backCenter"><a href="{{ path('home') }}">Retour à l'accueil</a></button>
+    {% endblock %}

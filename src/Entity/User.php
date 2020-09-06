@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 
@@ -73,6 +75,22 @@ class User implements UserInterface
      * @ORM\Column(type="float", nullable=true)
      */
     private $creditDuration;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Reservation::class, mappedBy="user")
+     */
+    private $reservation;
+
+    /**
+     * @ORM\OneToMany(targetEntity=UserTicketBook::class, mappedBy="user")
+     */
+    private $userTicketBook;
+
+    public function __construct()
+    {
+        $this->reservation = new ArrayCollection();
+        $this->userTicketBook = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -244,6 +262,68 @@ class User implements UserInterface
     public function setCreditDuration(?float $creditDuration): self
     {
         $this->creditDuration = $creditDuration;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Reservation[]
+     */
+    public function getReservation(): Collection
+    {
+        return $this->reservation;
+    }
+
+    public function addReservation(Reservation $reservation): self
+    {
+        if (!$this->reservation->contains($reservation)) {
+            $this->reservation[] = $reservation;
+            $reservation->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeReservation(Reservation $reservation): self
+    {
+        if ($this->reservation->contains($reservation)) {
+            $this->reservation->removeElement($reservation);
+            // set the owning side to null (unless already changed)
+            if ($reservation->getUser() === $this) {
+                $reservation->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|UserTicketBook[]
+     */
+    public function getUserTicketBook(): Collection
+    {
+        return $this->userTicketBook;
+    }
+
+    public function addUserTicketBook(UserTicketBook $userTicketBook): self
+    {
+        if (!$this->userTicketBook->contains($userTicketBook)) {
+            $this->userTicketBook[] = $userTicketBook;
+            $userTicketBook->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUserTicketBook(UserTicketBook $userTicketBook): self
+    {
+        if ($this->userTicketBook->contains($userTicketBook)) {
+            $this->userTicketBook->removeElement($userTicketBook);
+            // set the owning side to null (unless already changed)
+            if ($userTicketBook->getUser() === $this) {
+                $userTicketBook->setUser(null);
+            }
+        }
 
         return $this;
     }

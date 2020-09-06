@@ -19,18 +19,19 @@ class CourseStyleController extends AbstractController
 
     public function CourseStyle (CourseStyleRepository $courseStyleRepository)
     {
-        // je veux récupérer une instance de la variable 'CourseStyleRepository $courseStyleRepository...'
+        // je veux récupérer une instance de la variable 'CourseStyleRepository $courseStyleRepository'
         //J'instancie dans la variable la class pour récupérer les valeurs requises
 
         // je crée ma route pour ma page de services
 
-        $CourseStyle = $courseStyleRepository->findAll();
+        $courseStyle = $courseStyleRepository->findAll();
 
         // Je crée ma recherche puis je lui donne une valeur
+
         return $this->render('courseStyle/adminCourseStyleShow.html.twig',[
-            // je crée la variable Twig 'course'  que j'irai appeler dans mon fichier Twig Home.html.twig
-            'CourseStyle' => $CourseStyle
+            'courseStyle' => $courseStyle
         ]);
+            // je crée la variable Twig 'courseStyle' que j'irai appeler dans mon fichier Twig
     }
     /**
      * @Route("/cours_style_insert", name="course_style_insert")

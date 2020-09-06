@@ -67,6 +67,17 @@ class Course
      */
     private $alt;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=CourseStyle::class, inversedBy="courses")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $courseStyle;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Reservation::class, inversedBy="courses")
+     */
+    private $reservation;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -168,16 +179,20 @@ class Course
         return $this;
     }
 
-    public function getPhoto(): ?string
+    /**
+     * @return mixed
+     */
+    public function getPhoto()
     {
         return $this->photo;
     }
 
-    public function setPhoto(string $photo): self
+    /**
+     * @param mixed $photo
+     */
+    public function setPhoto($photo): void
     {
         $this->photo = $photo;
-
-        return $this;
     }
 
     public function getAlt(): ?string
@@ -188,6 +203,30 @@ class Course
     public function setAlt(string $alt): self
     {
         $this->alt = $alt;
+
+        return $this;
+    }
+
+    public function getCourseStyle(): ?CourseStyle
+    {
+        return $this->courseStyle;
+    }
+
+    public function setCourseStyle(?CourseStyle $courseStyle): self
+    {
+        $this->courseStyle = $courseStyle;
+
+        return $this;
+    }
+
+    public function getReservation(): ?Reservation
+    {
+        return $this->reservation;
+    }
+
+    public function setReservation(?Reservation $reservation): self
+    {
+        $this->reservation = $reservation;
 
         return $this;
     }

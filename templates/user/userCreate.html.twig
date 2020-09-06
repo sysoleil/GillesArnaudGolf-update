@@ -1,0 +1,72 @@
+{% extends 'commons/base.html.twig' %}
+{% block title %}Créer compte{% endblock %}
+    {% block body %}
+        {% include 'commons/_headerLittle.html.twig' %}
+        <main>
+            <h1 class="userTitle"> créer son compte</h1>
+            <section>
+                <div class="formulaireUser">
+
+                    {{ form_start(userForm,{'attr':{'class': 'userForm'}}) }}
+
+                    <div>{{ form_label(userForm.lastName) }}
+                        {{ form_widget(userForm.lastName, {'attr': {'class':'inptuLastName'}}) }}
+                        {{ form_errors(userForm)}}
+                        {{ form_label(userForm.firstName) }}
+                        {{ form_widget(userForm.firstName, {'attr': {'class':'inputFirstName'}}) }}
+                        {{ form_errors(userForm)}}
+                    </div>
+                    {# je crée un label issu du formulaire 'userForm' je crée un 'widget' ou input
+                    et lui attribue une class
+
+                    Ensuite je fais une classe dans le CSS #}
+
+                    {#  J'active l'affichage des erreurs avec 'form_errors'
+
+                    Ensuite je vais dans mon entité Constraints auquel je mets l'alias Assert
+                    dans la base de symfony dans mon Entité user
+
+                    Ensuite je créé @Assert et je mets la contrainte que je souhaite afficher #}
+
+                    <div> {{ form_label(userForm.dateBirth) }}
+                        {{ form_widget(userForm.dateBirth, {'attr': {'class':'inputDateBirth'}}) }}
+                        {{ form_label(userForm.genre) }}
+                        {{ form_widget(userForm.genre, {'attr': {'class':'inputGenre'}}) }}
+                        {{ form_label(userForm.phone) }}
+                        {{ form_widget(userForm.phone, {'attr': {'class': 'inputPhone'}}) }}
+                        {{ form_errors(userForm.phone)}}
+                    </div>
+                    <div>
+                        {{ form_label(userForm.email) }}
+                        {{ form_widget(userForm.email, {'attr': {'class': 'inputEmail'}}) }}
+                        {{ form_errors(userForm.email)}}
+                        {{ form_label(userForm.pseudo) }}
+                        {{ form_widget(userForm.pseudo, {'attr': {'class': 'inputPseudo'}}) }}
+                        {{ form_errors(userForm.pseudo)}}
+                    </div>
+                    <div>
+                        {{ form_label(userForm.level) }}
+                        {{ form_widget(userForm.level, {'attr': {'class': 'inputLevel'}}) }}
+                        {{ form_label(userForm.club) }}
+                        {{ form_widget(userForm.club, {'attr': {'class': 'inputClub'}}) }}
+                    </div>
+                    <br>
+                    <div class="w6-half">
+                        {{ form_label(userForm.password) }}
+                        {{ form_widget(userForm.password, {'attr': {'class': 'inputPassword'}}) }}
+                        {{ form_errors(userForm.password)}}
+                        <input class="w6-input w6-border" type="text" placeholder="Répéter votre mot de passe">
+                    </div>
+                </div>
+                <div> {{ form_label(userForm.submit) }}
+                    {{ form_widget(userForm.submit, {'attr': {'class':'inputSubmit'}}) }}
+                </div>
+
+                {{ form_end(userForm) }}
+
+                {#                            <div class="w6-row-padding"> #}
+                <a class="button buttonLeft" href="{{ path('home') }}">retour accueil</a>
+                {#                             </div> #}
+            </section>
+        </main>
+    {% endblock %}
