@@ -12,6 +12,7 @@ class HomeController extends AbstractController
      */
 
     public function home (){
+       // $this->denyAccessUnlessGranted ('Role_admin');
         return $this->render ('commons/home.html.twig');
     }
 }
