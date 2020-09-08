@@ -20,7 +20,7 @@ class UserRegistrationType extends AbstractType
                 'type' => PasswordType::class,
                 'first_options'  => ['label' => 'Mot de passe'],
                 'second_options' => ['label' => 'Répeter mot de passe'],
-                'invalid_message' => 'Les mots de passe de sont pas identiques',
+                'invalid_message' => 'Les mots de passe ne sont pas identiques',
             ])
             ->add('email')
             ->add("submit", SubmitType::class ,[

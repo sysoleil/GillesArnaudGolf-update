@@ -1,4 +1,4 @@
-{% extends 'commons/base.html.twig' %}
+{# {% extends 'commons/base.html.twig' %}
 {% block title %}Créer compte{% endblock %}
     {% block body %}
         {% include 'commons/_headerLittle.html.twig' %}
@@ -28,7 +28,7 @@
 
                     Ensuite je créé @Assert et je mets la contrainte que je souhaite afficher #}
 
-                    <div> {{ form_label(userForm.dateBirth) }}
+                  {#  <div> {{ form_label(userForm.dateBirth) }}
                         {{ form_widget(userForm.dateBirth, {'attr': {'class':'inputDateBirth'}}) }}
                         {{ form_label(userForm.genre) }}
                         {{ form_widget(userForm.genre, {'attr': {'class':'inputGenre'}}) }}
@@ -62,11 +62,11 @@
                     {{ form_widget(userForm.submit, {'attr': {'class':'inputSubmit'}}) }}
                 </div>
 
-                {{ form_end(userForm) }}
+                {{ form_end(userForm) }} #}
 
-                {#                            <div class="w6-row-padding"> #}
+                {#                            <div class="w6-row-padding">
                 <a class="button buttonLeft" href="{{ path('home') }}">retour accueil</a>
-                {#                             </div> #}
-            </section>
-        </main>
-    {% endblock %}
+                                            </div> #}
+        {#     </section>
+    </main>
+ {% endblock %} #}

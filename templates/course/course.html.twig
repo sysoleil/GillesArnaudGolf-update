@@ -3,6 +3,11 @@
         <main class="courseMain">
             {% include 'commons/_headerLittle.html.twig' %}
             <h1 class="courseTitle"> LES COURS</h1>
+            <div class="">
+                {#                      {% if is_granted("ROLE_ADMIN") %} #}
+                <a class="button" href="{{ path('course_insert') }}">Créer un cours</a>
+                {#                            {% endif %} #}
+            </div>
             <section class="courseDisplay">
                 {% for course in courses %}
                     <div class="courseContainer">
@@ -24,7 +29,7 @@
                         </div>
                         <div class="buttonCenter">
                             <div class="courseShowButton">
-                                <a class="button" href="">Réserver</a>
+                                <a class="button" href="resa">Réserver</a>
                             </div>
                         </div>
                     </div>

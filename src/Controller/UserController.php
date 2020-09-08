@@ -3,16 +3,34 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Form\UserRegistrationType;
 use App\Form\UserType;
 use App\Repository\UserRepository;
+use App\Security\EmailVerifier;
 use Doctrine\ORM\EntityManagerInterface;
+//use http\Env\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Bundle\SecurityBundle\Security\UserAuthenticator;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Symfony\Component\Security\Guard\GuardAuthenticatorHandler;
+use Symfony\Bridge\Twig\Mime\TemplatedEmail;
+use Symfony\Component\Mime\Address;
+use SymfonyCasts\Bundle\VerifyEmail\Exception\VerifyEmailExceptionInterface;
+
 
 class UserController extends AbstractController
 
 {
+    private $emailVerifier;
+
+    public function __construct(EmailVerifier $emailVerifier)
+    {
+        $this->emailVerifier = $emailVerifier;
+    }
+
     /**
      * @Route("/user", name="admin_user")
      */
@@ -37,33 +55,83 @@ class UserController extends AbstractController
      * @Route("/user_create", name="user_create")
      */
 
-    public function userCreate (UserRepository $userRepository,
-                                Request $request,
-                                EntityManagerInterface $entityManager)
+    public function userCreate(Request $request,
+                                UserPasswordEncoderInterface $passwordEncoder,
+                                GuardAuthenticatorHandler $guardAuthenticatorHandler,
+                                UserAuthenticator $authenticator,
+                                Response $response,
+                                UserRepository $userRepository,
+                                EntityManagerInterface $entityManager): Response
     {
         $user = new User();
+        $form = $this->createForm(UserRegistrationType::class, $user);
+       // $form->handleRequest($request);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            // encode the plain password
+            $user->setPassword(
+                $passwordEncoder->encodePassword(
+                    $user,
+                    $form->get('plainPassword')->getData()
+                )
+            );
+
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($user);
+            $entityManager->flush();
+
+            $this->addFlash('success', 'Email envoyé, merci pour votre inscription');
+            $this->redirectToRoute('home');
+
+            // generate a signed url and email it to the user
+            $this->emailVerifier->sendEmailConfirmation('app_verify_email', $user,
+                (new TemplatedEmail())
+                    ->from(new Address('administrateur@dropshipresource.com', 'DropshipResource'))
+                    ->to($user->getEmail())
+                    ->subject('Confirmation email')
+                    ->htmlTemplate('registration/confirmation_email.html.twig')
+            );
+
+            // do anything else you need here, like send an email
+
+            return $guardHandler->authenticateUserAndHandleSuccess(
+                $user,
+                $request,
+                $authenticator,
+                'main' // firewall name in security.yaml
+            );
+        }
+
+        return $this->render('user/userCreate.html.twig', [
+            'registrationForm' => $form->createView(),
+        ]);
+
+        // $user = new User();
         // j'instancie un nouvel utilisateur et je lui donne la variable $user
-        $userForm = $this-> createForm(UserType::class, $user);
+       // $userForm = $this-> createForm(UserType::class, $user);
         // je récupère le gabarit du formulaire de l'entité User,
         // créé  dans la console avec la commande make:form
         // et je le stocke dans une variable $userForm
-        $userForm->handleRequest($request);
+        //$userForm->handleRequest($request);
         //Je prends les données crées et les envoie à mon formulaire
 
-        if ($userForm->isSubmitted() && $userForm->isValid()) {
+        //if ($userForm->isSubmitted() && $userForm->isValid()) {
 
-            $entityManager->persist($user);
+        //    $entityManager->persist($user);
             // J'enregistre le nouvel utilisateur
-            $entityManager->flush();
+        //    $entityManager->flush();
             //je sauvegarde la nouvelle donnée
 
-            $this->addFlash('success', 'Votre compte utilisateur a bien été créé');
+        //    $this->addFlash('success', 'Votre compte utilisateur a bien été créé');
             # Je demande l'affichage du 'message' tel qu'indiqué #}
-            return $this->redirectToRoute('user_show');
-        }
-        return $this->render('user/userCreate.html.twig',[
-            'userForm' => $userForm->createView(),
-            'user' => $user]);
+        //    return $this->redirectToRoute('user_show');
+        //}
+        //return $this->render('user/userCreate.html.twig',[
+        //    'userForm' => $userForm->createView(),
+         //   'user' => $user]);
+
+
     }
 
     /**
