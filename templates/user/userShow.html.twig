@@ -3,21 +3,21 @@
         {% include 'commons/_headerLittle.html.twig' %}
         <main class="headUser">
             <section class="userShowDisplay filtreHeader">
-                <p class="textOnB">email</p>
-                <input type="email" placeholder="toto@exemple.com" class="userBox">
-                <br>
-                <p class="textOnB">mot de passe</p>
-                <input type="password" placeholder="Votre mot de passe" class="userBox">
+                <p class="userContainer">email</p>
 
-                <div> {{ form_label(courseForm.submit) }}
-                    {{ form_widget(courseForm.submit, {'attr': {'class':'inputSubmit'}}) }}</div>
-
+                        <input type="email" placeholder="toto@exemple.com" class="userBox">
+                        <br>
+                        <p class="userButton">mot de passe</p>
+                        <input type="password" placeholder="Votre mot de passe" class="userBox">
+                <div class="userShowButton">
+                    <a class="button" href="{{ path('user_create') }}">Pas encore de compte</a>
+                </div>
                 <div class="userShowButton">
                     <a class="button" href="{{ path('user_create') }}">Pas encore de compte</a>
                 </div>
             </section>
             <section>
-                {#    <a class="userButton" href="{{ path('user_show',{'id':user.id}) }}">modifier</a>
+                {#     <a class="userButton" href="{{ path('user_show',{'id':user.id}) }}">modifier</a>
 
                 {#   <a class="button buttonConnect" href="{{ path('home') }}">Se connecter</a>
                       <input type="submit" name="Se connecter"  href="{{ path('home') }}" class="buttonConnect">#}

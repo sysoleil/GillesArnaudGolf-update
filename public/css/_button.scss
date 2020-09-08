@@ -1,5 +1,5 @@
 .button{
-  padding: 15px 45px;
+  padding: 7px 25px;
   background-color: $green;
   color: $white;
   border-radius: 60%;
@@ -38,4 +38,9 @@
   background-color: $green;
   color: $white;
   border-radius: 60%;
+}
+// -------------------------------------        CALENDAR        ----------------------------
+#calendar{
+  width: 80%;
+  margin: auto;
 }

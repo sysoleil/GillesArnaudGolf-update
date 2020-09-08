@@ -16,28 +16,28 @@ class ReservationController extends AbstractController
 
 {
     /**
-     * @Route("/reservation", name="reservation")
+     * @Route("/resa", name="resa")
      */
 
-    public function reservation (ReservationController $reservationController)
+    public function reservation ( )
     {
         // je veux récupérer une instance de la variable 'ReservationController $reservationController'
         //J'instancie dans la variable la class pour récupérer les valeurs requises
 
         // je crée ma route pour ma page de reservations
 
-        $reservation = $reservationController->findAll();
+     //   $reservation = $reservationRepository->findAll();
         // $types = $userCourseRepository->findBy([],['id' =>'desc']);
 
         // Je crée ma recherche puis je lui donne une valeur
-        return $this->render('reservation/adminReservationShow.html.twig',[
+        return $this->render('reservation/reservation.html.twig',[
             // je crée la variable Twig '$userCourse'  que j'irai appeler dans mon fichier Twig Home.html.twig
-            'reservation' => $reservation
+            'contoller_name' => 'ReservationController',
         ]);
     }
-    /**
-     * @Route("/reservationnsert", name="reservation_insert")
-     */
+ //   /**
+ //    * @Route("/reservation_insert", name="reservation_insert")
+ //    */
 
     public function reservationInsert (ReservationRepository $reservationRepository,
                                       Request $request,
