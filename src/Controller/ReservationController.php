@@ -9,6 +9,7 @@ use App\Repository\ReservationRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 
@@ -69,6 +70,10 @@ class ReservationController extends AbstractController
 
     /**
      * @Route("/reservation_delete/{id}", name="reservation_delete")
+     * @param ReservationRepository $reservationRepository
+     * @param EntityManagerInterface $entityManager
+     * @param $id
+     * @return RedirectResponse
      */
 
     public function reservationDelete(ReservationRepository $reservationRepository,
@@ -83,6 +88,11 @@ class ReservationController extends AbstractController
 
     /**
      * @Route("/reservation_update/{id}", name="reservation_update")
+     * @param ReservationRepository $reservationRepository
+     * @param Request $request
+     * @param EntityManagerInterface $entityManager
+     * @param $id
+     * @return RedirectResponse|Response
      */
     // je crée ma route pour ma page
     public function reservationUpdate(ReservationRepository $reservationRepository,
@@ -126,8 +136,12 @@ class ReservationController extends AbstractController
             // la vue du formulaire, générée avec la méthode createView()
         ]);
     }
+
     /**
      * @Route("/admin/reservation_show/{id}", name="admin_reservation_show")
+     * @param ReservationRepository $reservationRepository
+     * @param $id
+     * @return Response
      */
 
     public function adminReservationShow(ReservationRepository $reservationRepository, $id)

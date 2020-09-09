@@ -5,9 +5,11 @@ namespace App\Controller;
 use App\Entity\Course;
 use App\Form\CourseType;
 use App\Repository\CourseRepository;
+use App\Repository\CourseStyleRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -17,9 +19,11 @@ class CourseController extends AbstractController
 {
     /**
      * @Route("/cours", name="course")
+     * @param CourseRepository $courseRepository
+     * @return Response
      */
 
-    public function courseList (CourseRepository $courseRepository)
+    public function courseList (CourseRepository $courseRepository, CourseStyleRepository $courseStyleRepository)
     {
         // je veux récupérer une instance de la variable 'CourseRepository $courseRepository...'
         //J'instancie dans la variable la class pour récupérer les valeurs requises
@@ -35,8 +39,13 @@ class CourseController extends AbstractController
             'courses' => $courses
         ]);
     }
+
     /**
-     * @Route("/cours_insert", name="course_insert")
+     * @Route("/admin/cours_insert", name="course_insert")
+     * @param CourseRepository $courseRepository
+     * @param Request $request
+     * @param EntityManagerInterface $entityManager
+     * @return RedirectResponse|Response
      */
 
     public function courseInsert (CourseRepository $courseRepository,
@@ -77,7 +86,11 @@ class CourseController extends AbstractController
     }
 
     /**
-     * @Route("/course_delete/{id}", name="course_delete")
+     * @Route("/admin/course_delete/{id}", name="course_delete")
+     * @param CourseRepository $courseRepository
+     * @param EntityManagerInterface $entityManager
+     * @param $id
+     * @return RedirectResponse
      */
 
     public function courseDelete(CourseRepository $courseRepository,
@@ -91,7 +104,12 @@ class CourseController extends AbstractController
     }
 
     /**
-     * @Route("/cours_update/{id}", name="course_update")
+     * @Route("/admin/cours_update/{id}", name="course_update")
+     * @param CourseRepository $courseRepository
+     * @param Request $request
+     * @param EntityManagerInterface $entityManager
+     * @param $id
+     * @return RedirectResponse|Response
      */
     // je crée ma route pour ma page
     public function courseUpdate(CourseRepository $courseRepository,
@@ -140,7 +158,6 @@ class CourseController extends AbstractController
 
         $this->addFlash('success', 'Votre cours a bien été modifié');
         //J'ajoute un message flash pour confirmer la modif
-        //   return $this->redirectToRoute('course');
 
         $form = $courseForm->createView();
         //Je crée une nouvelle route pour instancier un nouveau cours
@@ -150,8 +167,12 @@ class CourseController extends AbstractController
             // la vue du formulaire, générée avec la méthode createView()
         ]);
     }
+
     /**
      * @Route("/cours_show/{id}", name="course_show")
+     * @param CourseRepository $courseRepository
+     * @param $id
+     * @return Response
      */
 
     public function courseShow(CourseRepository $courseRepository, $id)

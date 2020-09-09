@@ -8,8 +8,6 @@
         qui balisent mon formulaire. Ensuite en fonction des champs j'utilise form_widget() et form_label().
         Pour le second argument, j'utilise ensuite l'objet 'attr' pour gérer les classes de mes inputs
         #}
-        <div>
-            {{ form(userForm) }}
 
            <div class="formulaireUser">
 
@@ -82,7 +80,6 @@
             </div>
 
             {{ form_end(userForm) }}
-        </div>
         {% for message in app.flashes('info') %}
             <div class="flashInfo">
                 {{ message }}

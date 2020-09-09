@@ -46,13 +46,11 @@
                 {{ form_widget(courseForm.maxPerson, {'attr': {'class': 'inputMaxPerson'}}) }}
                 {{ form_errors(courseForm.maxPerson)}}
             </div>
-            {# {% if is_granted("ROLE_CE") %} #}
             <div>
                 {{ form_label(courseForm.priceCe) }}
                 {{ form_widget(courseForm.priceCe, {'attr': {'class': 'inputPriceCe'}}) }}
                 {{ form_errors(courseForm.priceCe)}}
             </div>
-            {# {% endif %} #}
             <div>
                 {{ form_label(courseForm.duration) }}
                 {{ form_widget(courseForm.duration, {'attr': {'class': 'inputDuration'}}) }}

@@ -1,5 +1,10 @@
 {% extends 'commons/base.html.twig' %}
     {% block body %}
+        {% for message in app.flashes('success') %}
+            <div class="successMessage">
+                {{ message }}
+            </div>
+        {% endfor %}
         {% include 'commons/_header.html.twig' %}
         <main>
             <section class="sectionOneHomePage">

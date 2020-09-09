@@ -4,9 +4,9 @@
             {% include 'commons/_headerLittle.html.twig' %}
             <h1 class="courseTitle"> LES COURS</h1>
             <div class="">
-                {#                      {% if is_granted("ROLE_ADMIN") %} #}
-                <a class="button" href="{{ path('course_insert') }}">Créer un cours</a>
-                {#                            {% endif %} #}
+                {% if is_granted("ROLE_ADMIN") %}
+                    <a class="button" href="{{ path('course_insert') }}">Créer un cours</a>
+                {% endif %}
             </div>
             <section class="courseDisplay">
                 {% for course in courses %}
@@ -22,10 +22,10 @@
                             </div>
                         </a>
                         <div>
-                            {#                      {% if is_granted("ROLE_ADMIN") %} #}
-                            <a class="button buttonDelete" href="{{ path('course_delete',{'id':course.id}) }}">supprimer</a>
-                            <a class="button" href="{{ path('course_update',{'id':course.id}) }}">modifier</a>
-                            {#                            {% endif %} #}
+                            {% if is_granted("ROLE_ADMIN") %}
+                                <a class="button buttonDelete" href="{{ path('course_delete',{'id':course.id}) }}">supprimer</a>
+                                <a class="button" href="{{ path('course_update',{'id':course.id}) }}">modifier</a>
+                            {% endif %}
                         </div>
                         <div class="buttonCenter">
                             <div class="courseShowButton">

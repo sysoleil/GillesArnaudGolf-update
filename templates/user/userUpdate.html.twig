@@ -3,7 +3,7 @@
     {% block body %}
         {% include 'commons/_headerLittle.html.twig' %}
 
-        {#  J'utilise ->  {{ form(courseForm) }}  ou pour pouvoir styliser
+        {#  J'utilise ->  {{ form(userForm) }}  ou pour pouvoir styliser
 je détaille comme ci-dessous   #}
         <main>
             <h1 class="userTitle"> Modifier son compte</h1>
@@ -43,9 +43,6 @@ je détaille comme ci-dessous   #}
                         {{ form_label(userForm.email) }}
                         {{ form_widget(userForm.email, {'attr': {'class': 'inputEmail'}}) }}
                         {{ form_errors(userForm.email)}}
-                        {{ form_label(userForm.pseudo) }}
-                        {{ form_widget(userForm.pseudo, {'attr': {'class': 'inputPseudo'}}) }}
-                        {{ form_errors(userForm.pseudo)}}
                     </div>
                     <div>
                         {{ form_label(userForm.level) }}

@@ -1,28 +1,37 @@
 {% extends 'commons/base.html.twig' %}
 {% block title %}Calendrier{% endblock %}
     {% block body %}
+        <div>
         {% include 'commons/_headerLittle.html.twig' %}
-        <main>
             <div id="calendar">
             </div>
-        </main>
+
+        {% block javascripts %}
+                <script>
+                    window.onload = () => {
+                        let calendarElt = document.querySelector("#calendar")
+
+                        let calendar = new FullCalendar.Calendar(calendarElt, {
+                            initialView: 'dayGridWeek',
+                            locale: 'fr',
+                            timeZone: 'Europe/Paris',
+                            headerToolbar: {
+                                start: 'prev,next today',
+                                center: 'title',
+                                end: 'dayGridMonth, timeGridWeek'
+                            },
+                            events: {{ data|raw }},
+                            editable: true
+                        })
+
+                        calendar.on('eventchange', (e) => {
+                            console.log(e)
+                        })
+
+                        calendar.render()
+                    }
+                        {# je lui passe l'élément et ensuite je précise les options#}
+                </script>
+            </div>
+        {% endblock %}
     {% endblock %}
-{% block javascripts %}
-    <script>
-        window.onload = () => {
-            let calendarElt = document.querySelector("#calendar")
-            let calendar = new FullCalendar.Calendar(calendarElt,{
-                initialView: 'DayGridWeek',
-                locale: 'fr',
-                timeZone: 'Europe/Paris',
-                headerToolbar:{
-                    start: 'prev, next, today',
-                    center: 'title',
-                    end: 'dayGridMonth,timeGridWeek'
-                }
-            })
-            {# je lui passe l'élément et ensuite je précise les options#}
-            calendar.render()
-        }
-    </script>
-{% endblock %}

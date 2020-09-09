@@ -11,13 +11,17 @@ use Doctrine\ORM\EntityManagerInterface;
 //use http\Env\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Bundle\SecurityBundle\Security\UserAuthenticator;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Mailer\MailerInterface;
+use Symfony\Component\Mime\Email;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Guard\GuardAuthenticatorHandler;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\Mime\Address;
+use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use SymfonyCasts\Bundle\VerifyEmail\Exception\VerifyEmailExceptionInterface;
 
 
@@ -32,40 +36,16 @@ class UserController extends AbstractController
     }
 
     /**
-     * @Route("/user", name="admin_user")
-     */
-
-    public function adminUser(UserRepository $userRepository)
-    {
-        // je veux récupérer une instance de la variable 'UserRepository $userRepository...'
-        //J'instancie dans la variable la class pour récupérer les valeurs requises
-
-        // je crée ma route pour ma page d'utilisateur
-
-        $users = $userRepository->findAll();
-        // $types = $userRepository->findBy([],['id' =>'desc']);
-
-        // Je crée ma recherche puis je lui donne une valeur
-        return $this->render('user/adminUser.html.twig', [
-            // je crée la variable Twig 'course'  que j'irai appeler dans mon fichier Twig Home.html.twig
-            'users' => $users
-        ]);
-    }
-    /**
      * @Route("/user_create", name="user_create")
+     * @param Request $request
+     * @param UserPasswordEncoderInterface $passwordEncoder
+     * @param MailerInterface $mailer
+     * @return Response
      */
-
-    public function userCreate(Request $request,
-                                UserPasswordEncoderInterface $passwordEncoder,
-                                GuardAuthenticatorHandler $guardAuthenticatorHandler,
-                                UserAuthenticator $authenticator,
-                                Response $response,
-                                UserRepository $userRepository,
-                                EntityManagerInterface $entityManager): Response
+    public function user_create(Request $request, UserPasswordEncoderInterface $passwordEncoder): Response
     {
         $user = new User();
-        $form = $this->createForm(UserRegistrationType::class, $user);
-       // $form->handleRequest($request);
+        $form = $this->createForm(UserType::class, $user);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -81,59 +61,76 @@ class UserController extends AbstractController
             $entityManager->persist($user);
             $entityManager->flush();
 
-            $this->addFlash('success', 'Email envoyé, merci pour votre inscription');
-            $this->redirectToRoute('home');
+
+            $this->addFlash('success', 'inscription confirmé');
+            return $this->redirectToRoute('home');
 
             // generate a signed url and email it to the user
-            $this->emailVerifier->sendEmailConfirmation('app_verify_email', $user,
-                (new TemplatedEmail())
-                    ->from(new Address('administrateur@dropshipresource.com', 'DropshipResource'))
-                    ->to($user->getEmail())
-                    ->subject('Confirmation email')
-                    ->htmlTemplate('registration/confirmation_email.html.twig')
-            );
+
+           // $this->('app_verify_email', $user,
+           //     (new TemplatedEmail())
+           //         ->from(new Address('sylvie.ferrer@lapiscine.pro', 'Gilles Arnaud'))
+           //         ->to($user->getEmail())
+           //         ->subject('Confirmation email')
+           //         ->htmlTemplate('user/registrationTemplate.html.twig')
+        ;
 
             // do anything else you need here, like send an email
-
-            return $guardHandler->authenticateUserAndHandleSuccess(
-                $user,
-                $request,
-                $authenticator,
-                'main' // firewall name in security.yaml
-            );
         }
 
         return $this->render('user/userCreate.html.twig', [
-            'registrationForm' => $form->createView(),
+            'userForm' => $form->createView(),
         ]);
-
-        // $user = new User();
-        // j'instancie un nouvel utilisateur et je lui donne la variable $user
-       // $userForm = $this-> createForm(UserType::class, $user);
-        // je récupère le gabarit du formulaire de l'entité User,
-        // créé  dans la console avec la commande make:form
-        // et je le stocke dans une variable $userForm
-        //$userForm->handleRequest($request);
-        //Je prends les données crées et les envoie à mon formulaire
-
-        //if ($userForm->isSubmitted() && $userForm->isValid()) {
-
-        //    $entityManager->persist($user);
-            // J'enregistre le nouvel utilisateur
-        //    $entityManager->flush();
-            //je sauvegarde la nouvelle donnée
-
-        //    $this->addFlash('success', 'Votre compte utilisateur a bien été créé');
-            # Je demande l'affichage du 'message' tel qu'indiqué #}
-        //    return $this->redirectToRoute('user_show');
-        //}
-        //return $this->render('user/userCreate.html.twig',[
-        //    'userForm' => $userForm->createView(),
-         //   'user' => $user]);
-
-
     }
 
+    /**
+     * @Route("/login", name="app_login")
+     * @param AuthenticationUtils $authenticationUtils
+     * @return Response
+     */
+    public function login(AuthenticationUtils $authenticationUtils): Response
+    {
+
+        // cela retourne une erreur si le login est incorrect
+        $error = $authenticationUtils->getLastAuthenticationError();
+        // // propose le dernier unserName entré par l'utilisateur
+        $lastUsername = $authenticationUtils->getLastUsername();
+
+        if ($this->getUser()) {
+            $this->addFlash('success', 'Connecté');
+            return $this->redirectToRoute('home');
+        }
+
+        return $this->render('security/login.html.twig', ['last_username' => $lastUsername, 'error' => $error]);
+    }
+
+    /**
+     * @Route("/logout", name="app_logout")
+     */
+    public function logout()
+    {
+        $this->addFlash('success', 'Deconnecté');
+        throw new \LogicException('This method can be blank - it will be intercepted by the logout key on your firewall.');
+    }
+    // * @Route("/verify/email", name="app_verify_email")
+    // * @param Request $request
+    // * @return Response
+    // */
+    //public function verifyUserEmail(Request $request): Response
+    //{
+     //   $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+
+        // validate email confirmation link, sets User::isVerified=true and persists
+     //   try {
+     //       $this->emailVerifier->handleEmailConfirmation($request, $this->getUser());
+     //   } catch (VerifyEmailExceptionInterface $exception) {
+     //       $this->addFlash('verify_email_error', $exception->getReason());
+
+     //       return $this->redirectToRoute('app_register');
+     //   }
+      //  $this->addFlash('success', 'Votre adresse email à été vérifié. Merci de votre confiance !');
+      //  return $this->redirectToRoute('home');
+    //}
     /**
      * @Route("/user_delete/{id}", name="user_delete")
      */

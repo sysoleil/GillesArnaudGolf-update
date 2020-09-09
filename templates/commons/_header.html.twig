@@ -10,7 +10,11 @@
                 <li class="nav"><a href="{{ path('home') }}"><i class="fas fa-golf-ball"></i> Tutos</a></li>
                 <li class="nav"><a href="{{ path('home') }}"><i class="fas fa-golf-ball"></i> Actualité</a></li>
                 <li class="nav"><a href="{{ path('home') }}"><i class="fas fa-golf-ball"></i> Gallerie</a></li>
-                <li class="nav"><a href="{{ path('user_show') }}"><i class="fas fa-golf-ball"></i> Utilisateur</a></li>
+                {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                    <li class="nav"><a href="{{ path('app_logout') }}"><i class="fas fa-golf-ball"></i> Logout</a></li>
+                {% else %}
+                    <li class="nav"><a href="{{ path('app_login') }}"><i class="fas fa-golf-ball"></i> Login</a></li>
+                {% endif %}
                 <li class="nav"><a href="{{ path('home') }}"><i class="fas fa-golf-ball"></i> Contact</a></li>
                 <li class="nav"><a href="{{ path('home') }}"><i class="fas fa-golf-ball"></i> CE</a></li>
             </ul>
