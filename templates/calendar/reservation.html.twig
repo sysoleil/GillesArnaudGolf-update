@@ -1,0 +1,54 @@
+{% extends 'commons/base.html.twig' %}
+{% block title %}Calendrier{% endblock %}
+    {% block body %}
+        <div>
+        {% include 'commons/_headerLittle.html.twig' %}
+            <div id="calendar">
+            </div>
+        {% block javascripts %}
+                <script>
+                    window.onload = () => {
+                        let calendarElt = document.querySelector("#calendar")
+
+                        let calendar = new FullCalendar.Calendar(calendarElt, {
+                            initialView: 'timeGridWeek',
+                            locale: 'fr',
+                            timeZone: 'Europe/Paris',
+                            slotMinTime: "08:00:00",
+                            slotMaxTime: "19:00:00",
+                            headerToolbar: {
+                                start: 'prev,next today',
+                                center: 'title',
+                                end: 'dayGridMonth, timeGridWeek'
+                            },
+                            events: {{ data | raw }},
+                            //permet de redimensionner et déplacer le rdv
+                            editable: true,
+                            eventResizableFromStart: true
+                        })
+
+                        calendar.on('eventChange', (e) => {
+                       let url = `/api/${e.event.id}/edit`
+                            {# je vais ensuite passer les données #}
+                        let donnees = {
+                            "title": e.event.title,
+                            {# pour aller chercher la description j'irai la trouver sous extendsProps#}
+                            "description": e.event.description,
+                            "start": e.event.start,
+                            "end": e.event.end,
+                            "backgroundColor": e.event.backgroundColor,
+                            "borderColor": e.event.borderColor,
+                            "textColor": e.event.textColor
+                    }
+                    let xhr = new XMLHttpRequest
+                    xhr.open("PUT", url)
+                    xhr.send(JSON.stringify(donnees))
+                })
+
+                calendar.render()
+            }
+                {# je lui passe l'élément et ensuite je précise les options#}
+                </script>
+            </div>
+        {% endblock %}
+    {% endblock %}

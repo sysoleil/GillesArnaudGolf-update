@@ -86,7 +86,7 @@ class CourseController extends AbstractController
     }
 
     /**
-     * @Route("/admin/course_delete/{id}", name="course_delete")
+     * @Route("/admin/cours_delete/{id}", name="course_delete")
      * @param CourseRepository $courseRepository
      * @param EntityManagerInterface $entityManager
      * @param $id
@@ -180,6 +180,35 @@ class CourseController extends AbstractController
         $course = $courseRepository->find($id);
         return $this->render('course/courseShow.html.twig',[
             'course' => $course
+        ]);
+    }
+    /**
+     * @Route("/course/search/name", name="Course_Search_name")
+     */
+    public function FindByWords(CourseRepository $courseRepository, Request $request)
+    {//J'instancie la class BookRepository dans la variable $bookRepository ça s'appelle l'AutoWire
+        //idem pour Request
+        //permet de récupérer tout ce que contient la class request
+        // type int pour integer
+
+        // Je récupére la valeur du paramétre dans l'Url
+        // tapé dans le formulaire de "recherche". Je le met dans une classe
+        $word = $request -> query->get('search');
+
+        // J'initialise une variable $courses qui contiendra un Array vide,
+        // Ainsi je n'aurai pas d'erreur si je n'ai pas de parametre d'url de recherche
+        // et que donc ma méthode '$courseRepository'ne sera pas appelée
+        $courses =[];
+
+        //si mon utilisateur fait une recherche (Le paramètre sera dans l'Url)
+        if (!empty($word)) {
+            // je crée la requête select pour trouver dans la bdd $courseRepository les cours contenant
+            //le paramètre saisi par l'utilisateur
+            $courses = $courseRepository ->FindByWords($word);
+        }
+        // j'appelle mon fichier twig avec les cours trouvés en BDD
+        return $this->render('search.html.twig', [
+            'course' => $courses
         ]);
     }
 }

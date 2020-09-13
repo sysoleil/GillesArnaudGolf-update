@@ -1,23 +1,27 @@
 {% extends 'commons/base.html.twig' %}
 {% block body %}
-    <div class="formulaiReregister" style="color:white;">
+    {% include 'commons/_headerLittle.html.twig' %}
+    <div class="formulaireRegister" style="color:white;">
         {{ form_start(registrationForm) }}
-        <div>
-            {{ form_label(registrationForm.password.first) }}
-            {{ form_widget(registrationForm.password.first, {'attr': {'class': 'input_password'}}) }}
-            {{ form_errors(registrationForm.password.first) }}
+        <div class="registerMail">
+            <div>
+                {{ form_label(registrationForm.email) }}
+                {{ form_widget(registrationForm.email, {'attr': {'class': 'input_email'}}) }}
+                {{ form_errors(registrationForm.email) }}
+            </div>
+            <div>
+                {{ form_label(registrationForm.password.first) }}
+                {{ form_widget(registrationForm.password.first, {'attr': {'class': 'input_password'}}) }}
+                {{ form_errors(registrationForm.password.first) }}
+            </div>
+            <div>
+                {{ form_label(registrationForm.password.second) }}
+                {{ form_widget(registrationForm.password.second, {'attr': {'class': 'input_password'}}) }}
+                {{ form_errors(registrationForm.password.second) }}
+
+                {{ form_widget(registrationForm.submit, {'attr': {'class': 'submit'}}) }}
+            </div>
+            {{ form_end(registrationForm) }}
         </div>
-        <div>
-            {{ form_label(registrationForm.password.second) }}
-            {{ form_widget(registrationForm.password.second, {'attr': {'class': 'input_password'}}) }}
-            {{ form_errors(registrationForm.password.second) }}
-        </div>
-        {{ form_label(registrationForm.email) }}
-        {{ form_widget(registrationForm.email, {'attr': {'class': 'input_email'}}) }}
-        {{ form_errors(registrationForm.email) }}
-        <div>
-            {{ form_widget(registrationForm.submit, {'attr': {'class': 'submit'}}) }}
-        </div>
-        {{ form_end(registrationForm) }}
     </div>
 {% endblock %}

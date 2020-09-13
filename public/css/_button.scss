@@ -33,14 +33,25 @@
 .userButtonCenter{
   justify-content: space-between;
 }
-.userButton{
+.userButtonUpdate{
   padding: 8px 20px;
   background-color: $green;
   color: $white;
   border-radius: 60%;
 }
 // -------------------------------------        CALENDAR        ----------------------------
-#calendar{
-  width: 80%;
-  margin: auto;
+.calendarButtonLeft{
+  width: 17%;
+  padding: 10px 50px;
+  display: flex;
+  background-color: $green;
+  color: $white;
+  border-radius: 60%;
+  margin: 30px;
+}
+.calendarButtonAccueil{
+  padding: 8px 20px;
+  background-color: $green;
+  color: $white;
+  border-radius: 60%;
 }

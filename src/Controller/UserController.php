@@ -28,13 +28,6 @@ use SymfonyCasts\Bundle\VerifyEmail\Exception\VerifyEmailExceptionInterface;
 class UserController extends AbstractController
 
 {
-    private $emailVerifier;
-
-    public function __construct(EmailVerifier $emailVerifier)
-    {
-        $this->emailVerifier = $emailVerifier;
-    }
-
     /**
      * @Route("/user_create", name="user_create")
      * @param Request $request
@@ -45,10 +38,14 @@ class UserController extends AbstractController
     public function user_create(Request $request, UserPasswordEncoderInterface $passwordEncoder): Response
     {
         $user = new User();
-        $form = $this->createForm(UserType::class, $user);
-        $form->handleRequest($request);
+        // je récupère le gabarit du formulaire de l'entité User,
+        //  créé initialement dans la console avec la commande make:form.
+        // et je le stocke dans une variable $Form
+        $userForm = $this->createForm(UserType::class, $user);
+        //Je prends les données de ma requête et je les envois au formulaire
+        $userForm->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
+        if ($userForm->isSubmitted() && $userForm->isValid()) {
             // encode the plain password
             $user->setPassword(
                 $passwordEncoder->encodePassword(
@@ -56,13 +53,14 @@ class UserController extends AbstractController
                     $form->get('plainPassword')->getData()
                 )
             );
-
             $entityManager = $this->getDoctrine()->getManager();
+            // la méthode persist indique de récupérer la variable User modifiée et d'insérer
             $entityManager->persist($user);
+            // la méthode 'flush' enregistre la modification
             $entityManager->flush();
+            //J'ajoute un message flash pour confirmer l'inscription
+            $this->addFlash('success', 'inscription confirmée');
 
-
-            $this->addFlash('success', 'inscription confirmé');
             return $this->redirectToRoute('home');
 
             // generate a signed url and email it to the user
@@ -78,9 +76,20 @@ class UserController extends AbstractController
             // do anything else you need here, like send an email
         }
 
+        $form = $userForm->createView();
+        //Je crée une nouvelle route pour revenir sur l'utilisateur
         return $this->render('user/userCreate.html.twig', [
-            'userForm' => $form->createView(),
+            'userForm' => $form
+            // je retourne mon fichier twig, en lui envoyant
+            // la vue du formulaire, générée avec la méthode createView()
+
         ]);
+    }
+    private $emailVerifier;
+
+    public function __construct(EmailVerifier $emailVerifier)
+    {
+        $this->emailVerifier = $emailVerifier;
     }
 
     /**
@@ -93,7 +102,7 @@ class UserController extends AbstractController
 
         // cela retourne une erreur si le login est incorrect
         $error = $authenticationUtils->getLastAuthenticationError();
-        // // propose le dernier unserName entré par l'utilisateur
+        // propose le dernier unserName entré par l'utilisateur
         $lastUsername = $authenticationUtils->getLastUsername();
 
         if ($this->getUser()) {

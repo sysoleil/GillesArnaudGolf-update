@@ -33,10 +33,10 @@
                         De {{ course.minPerson }} a {{ course.maxPerson }} participants.
                     </p>
                     <p class="courseShowP">
-                        Durée: {{ course.duration }}
+                        Durée: {{ course.duration }} demi-heure(s)
                     </p>
                     <div class="courseShowButton">
-                        <a class="button" href="">Reserver</a>
+                        <a class="button" href="{{ path('calendar_new',{'id':course.id}) }}">Réserver</a>
                     </div>
                     <a class="button buttonLeft" href="{{ path('home') }}">Retour à l'accueil</a>
                 </div>

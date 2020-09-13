@@ -1,0 +1,39 @@
+{% extends 'commons/base.html.twig' %}
+    {% block body %}
+        <main class="courseMain">
+            {% include 'commons/_headerLittle.html.twig' %}
+            <h1 class="courseTitle"> LES COURS</h1>
+            <div>
+    {#   je créé un formulaire avec la méthode GET pour renvoyer la valeur recherchée
+     dans le formulaire, et renvoyer ce paramètre dans l'Url avec le name
+     soit la valeur recherchée dans le formulaire soit envoyée dans l'url
+     en parametre avec le name, soit ?search=xxxxxx     #}
+                <form action="" method="get">
+                    <label for="">Recherche</label>
+                    <input name="search" type="text">
+                </form>
+                    <section class="courseDisplay">
+                        {% for course in courses %}
+                            <div class="courseContainer">
+                                <a class="" href="{{ path('course_show',{'id':course.id}) }}">
+                                    <div class="courseHoverContainer">
+                                        <img class="coursePhoto" src="{{ asset('upload_directory/' ~ course.photo) }}" alt="{{ course.alt }}" name="{{ course.alt }}">
+                                        <div class="courseHover">
+                                            <h2>{{ course.name }}
+    {#             <a href="{{ path('courseShow', {'id': course.id}) }}"></a>#}
+                                            </h2>
+                                        </div>
+                                    </div>
+                                </a>
+                                <div class="buttonCenter">
+                                    <div class="courseShowButton">
+                                        <a class="button" href="resa">Réserver</a>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </section>
+                <a class="button buttonLeft" href="{{ path('home') }}">Retour à l'accueil</a>
+            </div>
+        </main>
+    {% endblock %}

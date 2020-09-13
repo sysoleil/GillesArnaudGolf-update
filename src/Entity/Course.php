@@ -73,10 +73,6 @@ class Course
      */
     private $courseStyle;
 
-    /**
-     * @ORM\ManyToOne(targetEntity=Reservation::class, inversedBy="courses")
-     */
-    private $reservation;
 
     public function getId(): ?int
     {
@@ -219,15 +215,5 @@ class Course
         return $this;
     }
 
-    public function getReservation(): ?Reservation
-    {
-        return $this->reservation;
-    }
 
-    public function setReservation(?Reservation $reservation): self
-    {
-        $this->reservation = $reservation;
-
-        return $this;
-    }
 }

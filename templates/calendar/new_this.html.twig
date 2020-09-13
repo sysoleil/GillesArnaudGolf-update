@@ -1,0 +1,12 @@
+{% extends 'commons/base.html.twig' %}
+    {% block body %}
+        <main class="courseMain">
+            {% include 'commons/_headerLittle.html.twig' %}
+                <title>réservation cours golf</title>
+                    <h1 class="calendarTitle">Réserver un cours de golf</h1>
+                        <div class="table">
+                        {{ include('calendar/_form.html.twig') }}
+                        </div>
+                    <a class="calendarButtonAccueil" href="{{ path('calendar_index') }}">Retour à l'agenda</a>
+        </main>
+    {% endblock %}

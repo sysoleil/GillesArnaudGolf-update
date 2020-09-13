@@ -79,10 +79,6 @@ class User implements UserInterface
      */
     private $creditDuration;
 
-    /**
-     * @ORM\OneToMany(targetEntity=Reservation::class, mappedBy="user")
-     */
-    private $reservation;
 
     /**
      * @ORM\OneToMany(targetEntity=UserTicketBook::class, mappedBy="user")
@@ -91,7 +87,6 @@ class User implements UserInterface
 
     public function __construct()
     {
-        $this->reservation = new ArrayCollection();
         $this->userTicketBook = new ArrayCollection();
     }
 
@@ -164,6 +159,7 @@ class User implements UserInterface
     public function getSalt()
     {
         // not needed when using the "bcrypt" algorithm in security.yaml
+        // Inutile si on utilise l'algo "bcrypt" dans security.yaml
     }
 
     /**
@@ -171,7 +167,7 @@ class User implements UserInterface
      */
     public function eraseCredentials()
     {
-        // If you store any temporary, sensitive data on the user, clear it here
+        // Si je veux stocker des données sensibles temporaires sur l'utilisateur, je les éfface ici
         // $this->plainPassword = null;
     }
 
@@ -267,37 +263,6 @@ class User implements UserInterface
     public function setCreditDuration(?float $creditDuration): self
     {
         $this->creditDuration = $creditDuration;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection|Reservation[]
-     */
-    public function getReservation(): Collection
-    {
-        return $this->reservation;
-    }
-
-    public function addReservation(Reservation $reservation): self
-    {
-        if (!$this->reservation->contains($reservation)) {
-            $this->reservation[] = $reservation;
-            $reservation->setUser($this);
-        }
-
-        return $this;
-    }
-
-    public function removeReservation(Reservation $reservation): self
-    {
-        if ($this->reservation->contains($reservation)) {
-            $this->reservation->removeElement($reservation);
-            // set the owning side to null (unless already changed)
-            if ($reservation->getUser() === $this) {
-                $reservation->setUser(null);
-            }
-        }
 
         return $this;
     }
