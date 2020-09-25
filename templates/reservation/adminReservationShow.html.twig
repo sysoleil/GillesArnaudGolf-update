@@ -11,7 +11,7 @@
                     </p>
                     <p class="courseShowP">
                         {#
-                                            {% elseif is_granted("ROLE_ADMIN") %}
+                                            {% elseif is_granted("ROLE_SUPER_ADMIN") %}
                                                 golfeur : {{ }}€
                                                 Date de réservation: {{  }}
                                                 {% if reservation. > 0 %}

@@ -8,6 +8,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
@@ -70,7 +71,7 @@ class User implements UserInterface
     private $dateBirth;
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
+     * @ORM\Column(type="string", nullable=true)
      */
     private $phone;
 
@@ -85,9 +86,15 @@ class User implements UserInterface
      */
     private $userTicketBook;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Calendar::class, mappedBy="user")
+     */
+    private $calendars;
+
     public function __construct()
     {
         $this->userTicketBook = new ArrayCollection();
+        $this->calendars = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -124,10 +131,8 @@ class User implements UserInterface
     {
         $roles = $this->roles;
         // guarantee every user at least has ROLE_USER
-        $roles[] = 'ROLE_ADMIN';
-        $roles[] = 'ROLE_USER';
         $roles[] = 'ROLE_CE';
-
+        $roles[] = 'ROLE_ADMIN';
         return array_unique($roles);
     }
 
@@ -292,6 +297,37 @@ class User implements UserInterface
             // set the owning side to null (unless already changed)
             if ($userTicketBook->getUser() === $this) {
                 $userTicketBook->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Calendar[]
+     */
+    public function getCalendars(): Collection
+    {
+        return $this->calendars;
+    }
+
+    public function addCalendar(Calendar $calendar): self
+    {
+        if (!$this->calendars->contains($calendar)) {
+            $this->calendars[] = $calendar;
+            $calendar->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCalendar(Calendar $calendar): self
+    {
+        if ($this->calendars->contains($calendar)) {
+            $this->calendars->removeElement($calendar);
+            // set the owning side to null (unless already changed)
+            if ($calendar->getUser() === $this) {
+                $calendar->setUser(null);
             }
         }
 

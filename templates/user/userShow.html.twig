@@ -1,22 +1,22 @@
 {% extends 'commons/base.html.twig' %}
     {% block body %}
+        <meta name="keywords" content="golf, professeur, cours, coach, gilles, arnaud, bordeaux, médoc, gironde, sport"/>
         {% include 'commons/_headerLittle.html.twig' %}
         <main class="headUser">
             <section class="userShowDisplay filtreHeader">
-                <p class="userContainer">email</p>
-
-                        <input type="email" placeholder="toto@exemple.com" class="userBox">
-                        <br>
-                        <p class="userButtonUpdate">mot de passe</p>
-                        <input type="password" placeholder="Votre mot de passe" class="userBox">
-                <div class="userShowButton">
-                    <a class="button" href="{{ path('user_create') }}">Pas encore de compte</a>
-                </div>
-                <div class="userShowButton">
-                    <a class="button" href="{{ path('user_create') }}">Pas encore de compte</a>
+                <div class="userShowContainerhowContainer">
+                    <h1>{{ user.lastName }}</h1>
+                    <p class="userShowP">
+                        {{ user.firstName }}
+                    </p>
+                    <p class="userShowP">Level :
+                        {{ user.level }}</p>
+                    <p class="userShowP">Date de naissance :
+                        {{ user.dateBirth }}</p>
                 </div>
             </section>
             <section>
+
                 {#     <a class="userButtonUpdate" href="{{ path('user_show',{'id':user.id}) }}">modifier</a>
 
                 {#   <a class="button buttonConnect" href="{{ path('home') }}">Se connecter</a>

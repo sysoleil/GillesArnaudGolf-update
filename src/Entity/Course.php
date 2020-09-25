@@ -3,7 +3,10 @@
 namespace App\Entity;
 
 use App\Repository\CourseRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=CourseRepository::class)
@@ -18,7 +21,12 @@ class Course
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=150)
+     * @ORM\Column(type="string")
+     * @Assert\Length(min="5",
+     *                max="150",
+     *                minMessage="le titre doit avoir plus de {{ limit }} carractères",
+     *                maxMessage="le titre ne doit pas comporter plus de {{ limit }} carractères")
+     *
      */
     private $name;
 
@@ -72,6 +80,16 @@ class Course
      * @ORM\JoinColumn(nullable=false)
      */
     private $courseStyle;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Calendar::class, mappedBy="course")
+     */
+    private $calendars;
+
+    public function __construct()
+    {
+        $this->calendars = new ArrayCollection();
+    }
 
 
     public function getId(): ?int
@@ -211,6 +229,37 @@ class Course
     public function setCourseStyle(?CourseStyle $courseStyle): self
     {
         $this->courseStyle = $courseStyle;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Calendar[]
+     */
+    public function getCalendars(): Collection
+    {
+        return $this->calendars;
+    }
+
+    public function addCalendar(Calendar $calendar): self
+    {
+        if (!$this->calendars->contains($calendar)) {
+            $this->calendars[] = $calendar;
+            $calendar->setCourse($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCalendar(Calendar $calendar): self
+    {
+        if ($this->calendars->contains($calendar)) {
+            $this->calendars->removeElement($calendar);
+            // set the owning side to null (unless already changed)
+            if ($calendar->getCourse() === $this) {
+                $calendar->setCourse(null);
+            }
+        }
 
         return $this;
     }

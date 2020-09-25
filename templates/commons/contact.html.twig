@@ -3,9 +3,23 @@
         <meta name="keywords" content="golf, professeur, cours, coach, gilles, arnaud, bordeaux, médoc, gironde, sport"/>
         {% include 'commons/_headerLittle.html.twig' %}
         <main class="ticketMain">
-            <div class="ticketShowDisplay">
                 <div class="ticketShowContainer">
-                    {% for ticketBook in ticketBook %}
+                    {{ form_start(form) }}
+                    <div class="row">
+                        <div class="col">{{ form_row(form.lastName) }}</div>
+                        <div class="col">{{ form_row(form.firstName) }}</div>
+                    </div>
+                    <div class="row">
+                        <div class="col">{{ form_row(form.phone) }}</div>
+                        <div class="col">{{ form_row(form.email) }}</div>
+                    </div>
+                    {{ form_rest(form) }}
+                    <div>
+                        <div class="userShowButton"> Envoyer</div>
+                    </div>
+                    {{ form_end(form) }}
+
+                   {# {% for ticketBook in ticketBook %}
                         <div class="ticketBox">
                             <h1>{{ ticketBook.name }}</h1>
                             <p class="ticketShowP"> Nombre d'unités : {{ ticketBook.duration }}</p>
@@ -16,9 +30,8 @@
                                 <a class="button" href="">cours acheté</a>
                             </div>
                         </div>
-                    {% endfor %}
-                    <a class="button buttonLeft" href="{{ path('ticket_book_show') }}">Les carnets</a>
+                    {% endfor %}  #}
+                    <a class="button buttonLeft" href="{{ path('home') }}">Retour accueil</a>
                 </div>
-            </div>
         </main>
     {% endblock %}

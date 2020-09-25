@@ -1,5 +1,6 @@
 {% extends 'commons/base.html.twig' %}
     {% block body %}
+        <meta name="keywords" content="golf, professeur, cours, coach, gilles, arnaud, bordeaux, médoc, gironde, sport"/>
         {% include 'commons/_headerLittle.html.twig' %}
         <main class="courseMain">
             <div class="courseShowDisplay">
@@ -15,7 +16,7 @@
                             {% if course.ticket > 0 %}
                                 ou {{ course.ticket }} ticket(s)
                             {% endif %}
-                        {% elseif is_granted("ROLE_ADMIN") %}
+                        {% elseif is_granted("ROLE_SUPER_ADMIN") %}
                             Prix CE: {{ course.priceCe }}€
                             Prix: {{ course.price }}€
                             {% if course.ticket > 0 %}

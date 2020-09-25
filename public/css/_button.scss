@@ -19,7 +19,7 @@
   bottom: 20px;
   font-family: $fontH;
 }
-// -------------------------------------    course BUTTON      ----------------------------
+// -------------------------------------    Courses BUTTON      ----------------------------
 .courseShowButton{
   display: flex;
   justify-content: space-around;
@@ -29,11 +29,30 @@
   display: flex;
   justify-content: center;
 }
+
+.courseButtonDelete{
+  background-color: $red;
+  color: $white;
+  border-radius: 60%;
+  line-height: 40px;
+  padding: 7px 25px;
+}
 // -------------------------------------    user BUTTON      ----------------------------
 .userButtonCenter{
   justify-content: space-between;
 }
 .userButtonUpdate{
+  padding: 2px 20px;
+  background-color: $green;
+  color: $white;
+  border-radius: 60%;
+  line-height: 40px;
+}
+.userButtonInsert{
+  position: absolute;
+  width: 150px;
+  text-align: center;
+  margin: 50px;
   padding: 8px 20px;
   background-color: $green;
   color: $white;
@@ -41,17 +60,23 @@
 }
 // -------------------------------------        CALENDAR        ----------------------------
 .calendarButtonLeft{
-  width: 17%;
+  width: 15%;
   padding: 10px 50px;
   display: flex;
   background-color: $green;
   color: $white;
   border-radius: 60%;
   margin: 30px;
+  text-align: center;
 }
 .calendarButtonAccueil{
+  margin: 50px;
+  position: absolute;
   padding: 8px 20px;
   background-color: $green;
   color: $white;
   border-radius: 60%;
+}
+.calendarButtonAccueilDown{
+  margin: 130px 42px;
 }

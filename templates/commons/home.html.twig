@@ -9,10 +9,11 @@
         <main>
             <section class="sectionOneHomePage">
                 <img class="imgSectionOneHomePage" src="{{ asset('../public/img/portrait.jpg') }}">
-                <p class="pSectionOneHomePage">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi assumenda cum delectus, error id minima, molestiae nam nisi optio quia quod sequi sit tenetur! Earum eligendi impedit inventore iusto quaerat saepe voluptas. Assumenda consequuntur enim fugit inventore magnam nesciunt placeat possimus sequi, sit ut, voluptates, voluptatum. Aspernatur, at autem beatae eaque est expedita fugit. Amet aperiam ea incidunt, quaerat quos reprehenderit. Magni nihil repellat ullam.</p>
+                <p class="pSectionOneHomePage">Gilles ARNAUD, professeur diplômé du brevet d’état d’éducateur sportif  2ème degré, enseigne le golf depuis 1984. J'ai été entraineur de la ligue de l’est puis de la ligue Champagne-Ardenne de 1986 à 1993. Et aussi entraineur fédéral de 1987 à 1992. J'ai été membre de l’équipe PGA Aquitaine de 1999 à 2002.
+                    Professeur au golf du médoc depuis 1992, j'accueille les golfeurs sur le superbe site du golf du Médoc.</p>
             </section>
             <section class="sectionHomePageCarousel">
-                <h1 class="titleHomePageCarousel">Mes cours</h1>
+                <h1 class="titleHomePageCarousel"><a href="{{ path('course') }}">Mes cours</a></h1>
                 <div id="carousel">
                     <figure id="spinner">
                         <img class="imgSectionHomePageCarousel" src="{{ asset("img/golfeur.jpg") }}"/>
@@ -29,16 +30,18 @@
                 <span style="float:right" class="ss-icon" onclick="galleryspin('')">&gt;</span>
             </section>
             <section class="sectionThreeHomePage">
-                <div>
-                    <h1 class="titlePlanning">Planning</h1>
+                <div class="displayNoneResponsive">
+                    <h1 class="titlePlanning"><a class="aPlanning" href="{{ path('cal_home') }}">Planning</a></h1>
                     <img class="imgSectionThreeHomePage" src="{{ asset("img/balle.jpg") }}"/>
                 </div>
+                <h1 class="responsive titlePlanning"><a class="aPlanning" href="{{ path('home') }}">Planning</a></h1>
+                <img class="responsive imgSectionThreeHomePage" src="{{ asset("img/balle.jpg") }}"/>
                 <div>
-                    <p class="pSectionThreeHomePage">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi assumenda cum delectus, error id minima, molestiae nam nisi optio quia quod sequi sit tenetur! Earum eligendi impedit inventore iusto quaerat saepe voluptas. Assumenda consequuntur enim fugit inventore magnam nesciunt placeat possimus sequi, sit ut, voluptates, voluptatum. Aspernatur, at autem beatae eaque est expedita fugit. Amet aperiam ea incidunt, quaerat quos reprehenderit. Magni nihil repellat ullam.</p>
+                    <p class="pSectionThreeHomePage">N'hésitez pas à prendre directement rendez-vous. Ou vous pouvez tout aussi bien me contacter par e-mail ou bien par téléphone, à votre convenance. En attendant de vous retrouver pour un cours.... golfez bien</p>
                 </div>
             </section>
             <section class="sectionHomePageCarousel">
-                <h1 class="titleHomePageCarousel">Mes conseils</h1>
+                <h1 class="titleHomePageCarousel"><a href="{{ path('home') }}">Mes conseils</a></h1>
                 <div id="carousel2">
                     <figure id="spinner2">
                         <img class="imgSectionHomePageCarousel" src="{{ asset("img/putting.jpg") }}"/>

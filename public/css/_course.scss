@@ -25,7 +25,6 @@
   text-align: center;
   margin: 10px 0;
 }
-
 .coursePhoto{
   width: 100%;
   height: 250px;
@@ -36,6 +35,12 @@
   color: $blue;
   font-size: $fs35;
   text-align: center;
+}
+courseTitleSmall{
+  margin-top: 30%;
+  font-size: $fs20;
+  color: $red;
+  font-family: $fontH;
 }
 //---------------------------        courses   HOVER    -------------------------------------
 
@@ -53,7 +58,7 @@
 // J'indique les propriétés attendues pour le cours
 // Pour récupérer le flux normal, j'indique "position:absolute"
 // la propriété z-index me permet de positionner cette class en dessous de l'autre
-.courseHover h2{
+.courseHover .courseTitleSmall{
   margin-top: 16%;
 }
 // ainsi que pour le titre lié au cours

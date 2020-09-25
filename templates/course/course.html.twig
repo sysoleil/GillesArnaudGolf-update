@@ -1,28 +1,31 @@
 {% extends 'commons/base.html.twig' %}
     {% block body %}
         <main class="courseMain">
+            <meta name="keywords" content="golf, professeur, cours, coach, gilles, arnaud, bordeaux, médoc, gironde, sport"/>
             {% include 'commons/_headerLittle.html.twig' %}
+            <meta name="keywords" content="golf, professeur, cours, coach, gilles, arnaud, bordeaux, médoc, gironde, sport"/>
             <h1 class="courseTitle"> LES COURS</h1>
             <div class="">
-                {% if is_granted("ROLE_ADMIN") %}
+                {% if is_granted("ROLE_SUPER_ADMIN") %}
                     <a class="button" href="{{ path('course_insert') }}">Créer un cours</a>
                 {% endif %}
             </div>
             <section class="courseDisplay">
                 {% for course in courses %}
                     <div class="courseContainer">
-                        <a class="" href="{{ path('course_show',{'id':course.id}) }}">
-                            <div class="courseHoverContainer">
+                        <a href="{{ path('course_show',{'id':course.id}) }}">
+                            <div class="courseHoverContainer courseHoverContainerResponsive">
                                 <img class="coursePhoto" src="{{ asset('upload_directory/' ~ course.photo) }}" alt="{{ course.alt }}" name="{{ course.alt }}">
-                                <div class="courseHover">
-                                    <h2>{{ course.name }}
+                                <div class="courseHover courseHoverResponsive">
+                                    <p class="courseTitleSmall">{{ course.name }}
     {#                                    <a href="{{ path('courseShow', {'id': course.id}) }}"></a>#}
-                                    </h2>
+                                    </p>
                                 </div>
+                                <p class="responsive courseNameResponsive">{{ course.name }}</p>
                             </div>
                         </a>
                         <div>
-                            {% if is_granted("ROLE_ADMIN") %}
+                            {% if is_granted("ROLE_SUPER_ADMIN") %}
                                 <a class="button buttonDelete" href="{{ path('course_delete',{'id':course.id}) }}">supprimer</a>
                                 <a class="button" href="{{ path('course_update',{'id':course.id}) }}">modifier</a>
                             {% endif %}
@@ -35,26 +38,6 @@
                     </div>
                 {% endfor %}
             </section>
-            {#
-
-
-                    <div class="container-fluid">
-                        <h2> {{ course.name }} </h2>
-                        <div class="row row-cols-3 row-cols-sm-2 row-cols-md-1">
-                            <div class="col col-sm-8 col-md-6 col-lg-6 courses">
-                                <img src="{{ asset('upload_directory/' ~ course.photo) }}">
-                                <div class="courses">
-
-                                </div>
-                                <a href="{{ path('course_show',{'id':course.id}) }}">
-                                    voir
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                {% endfor %}
-            </div>
-    #}
-            <a class="button buttonLeft" href="{{ path('home') }}">Retour à l'accueil</a>
+            <a class="button buttonLeft buttonResponsive" href="{{ path('home') }}">Retour à l'accueil</a>
         </main>
     {% endblock %}

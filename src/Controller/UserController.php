@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\User;
 use App\Form\UserRegistrationType;
 use App\Form\UserType;
+use App\Repository\CourseRepository;
 use App\Repository\UserRepository;
 use App\Security\EmailVerifier;
 use Doctrine\ORM\EntityManagerInterface;
@@ -28,63 +29,7 @@ use SymfonyCasts\Bundle\VerifyEmail\Exception\VerifyEmailExceptionInterface;
 class UserController extends AbstractController
 
 {
-    /**
-     * @Route("/user_create", name="user_create")
-     * @param Request $request
-     * @param UserPasswordEncoderInterface $passwordEncoder
-     * @param MailerInterface $mailer
-     * @return Response
-     */
-    public function user_create(Request $request, UserPasswordEncoderInterface $passwordEncoder): Response
-    {
-        $user = new User();
-        // je récupère le gabarit du formulaire de l'entité User,
-        //  créé initialement dans la console avec la commande make:form.
-        // et je le stocke dans une variable $Form
-        $userForm = $this->createForm(UserType::class, $user);
-        //Je prends les données de ma requête et je les envois au formulaire
-        $userForm->handleRequest($request);
 
-        if ($userForm->isSubmitted() && $userForm->isValid()) {
-            // encode the plain password
-            $user->setPassword(
-                $passwordEncoder->encodePassword(
-                    $user,
-                    $form->get('plainPassword')->getData()
-                )
-            );
-            $entityManager = $this->getDoctrine()->getManager();
-            // la méthode persist indique de récupérer la variable User modifiée et d'insérer
-            $entityManager->persist($user);
-            // la méthode 'flush' enregistre la modification
-            $entityManager->flush();
-            //J'ajoute un message flash pour confirmer l'inscription
-            $this->addFlash('success', 'inscription confirmée');
-
-            return $this->redirectToRoute('home');
-
-            // generate a signed url and email it to the user
-
-           // $this->('app_verify_email', $user,
-           //     (new TemplatedEmail())
-           //         ->from(new Address('sylvie.ferrer@lapiscine.pro', 'Gilles Arnaud'))
-           //         ->to($user->getEmail())
-           //         ->subject('Confirmation email')
-           //         ->htmlTemplate('user/registrationTemplate.html.twig')
-        ;
-
-            // do anything else you need here, like send an email
-        }
-
-        $form = $userForm->createView();
-        //Je crée une nouvelle route pour revenir sur l'utilisateur
-        return $this->render('user/userCreate.html.twig', [
-            'userForm' => $form
-            // je retourne mon fichier twig, en lui envoyant
-            // la vue du formulaire, générée avec la méthode createView()
-
-        ]);
-    }
     private $emailVerifier;
 
     public function __construct(EmailVerifier $emailVerifier)
@@ -142,6 +87,10 @@ class UserController extends AbstractController
     //}
     /**
      * @Route("/user_delete/{id}", name="user_delete")
+     * @param UserRepository $userRepository
+     * @param EntityManagerInterface $entityManager
+     * @param $id
+     * @return RedirectResponse
      */
 
     public function userDelete(UserRepository $userRepository,
@@ -157,6 +106,11 @@ class UserController extends AbstractController
 
     /**
      * @Route("/user_update/{id}", name="user_update")
+     * @param UserRepository $userRepository
+     * @param Request $request
+     * @param EntityManagerInterface $entityManager
+     * @param $id
+     * @return RedirectResponse|Response
      */
     // je crée ma route pour ma page
     public function userUpdate(UserRepository $userRepository,
@@ -199,13 +153,32 @@ class UserController extends AbstractController
             // la vue du formulaire, générée avec la méthode createView()
         ]);
     }
+
     /**
-     * @Route("/user_show", name="user_show")
+     * @Route("/admin_user", name="admin_user")
+     * @param UserRepository $userRepository
+     * @return Response
      */
 
-    public function userShow(UserRepository $userRepository)
+    public function adminUser(UserRepository $userRepository)
     {
-        $user = $userRepository->findAll();
+        $user = $userRepository->findAll(); ['name' => 'ASC'];
+        return $this->render('user/adminUser.html.twig',[
+            'user' => $user
+        ]);
+    }
+
+    /**
+     * @Route("/user_show/{id}", name="user_show")
+     * @param UserRepository $userRepository
+     * @param CourseRepository $courseRepository
+     * @param $id
+     * @return Response
+     */
+
+    public function userShow(UserRepository $userRepository,CourseRepository $courseRepository , $id)
+    {
+        $user = $userRepository->find($id);
         return $this->render('user/userShow.html.twig',[
             'user' => $user
         ]);

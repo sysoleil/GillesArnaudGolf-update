@@ -1,6 +1,7 @@
 {% extends 'commons/base.html.twig' %}
 {% block title %}Création cours{% endblock %}
     {% block body %}
+        <meta name="keywords" content="golf, professeur, cours, coach, gilles, arnaud, bordeaux, médoc, gironde, sport"/>
         {% include 'commons/_headerLittle.html.twig' %}
         <h1 class="courseTitle"> Enregistrer un cours</h1>
         {#       <div>
@@ -30,6 +31,9 @@
             dans la base de symfony dans mon Entité course
 
             Ensuite je créé @Assert et je mets la contrainte que je souhaite afficher #}
+        {#    <div> {{ form_label(courseForm.course_style.name) }}<br>
+                {{ form_widget(courseForm.course_style.name, {'attr': {'class':'inputCourseStyle'}}) }}
+            </div>#}
 
             <div> {{ form_label(courseForm.description) }}<br>
                 {{ form_widget(courseForm.description, {'attr': {'class':'inputDescription'}}) }}

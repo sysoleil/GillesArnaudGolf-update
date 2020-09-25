@@ -1,5 +1,5 @@
-<header class="headLittle">
-    <div class="filtreHeaderLittle">
+<header class="headLittle headerLittleResponsive">
+    <div class="filtreHeaderLittle filtreHeaderLittleResponsive">
         <nav class="itemsLittle">
             <div class="logoLittle">
                 <a href="{{ path('home') }}"><img class="logoChildLittle" src="{{ asset("img/logo1.jpg") }}" alt="golf gilles arnaud professeur enseignement"/>
@@ -7,16 +7,20 @@
             </div>
             <ul class="navContainer">
                 <li class="nav"><a href="{{ path('course') }}"><i class="fas fa-golf-ball"></i> Cours</a></li>
-                <li class="nav"><a href="{{ path('calendar_index') }}"><i class="fas fa-golf-ball"></i> Planning</a></li>
+                <li class="nav"><a href="{{ path('cal_home') }}"><i class="fas fa-golf-ball"></i> Planning</a></li>
                 <li class="nav"><a href="{{ path('home') }}"><i class="fas fa-golf-ball"></i> Tutos</a></li>
                 <li class="nav"><a href="{{ path('home') }}"><i class="fas fa-golf-ball"></i> Actualité</a></li>
                 <li class="nav"><a href="{{ path('home') }}"><i class="fas fa-golf-ball"></i> Gallerie</a></li>
+                {% if is_granted("ROLE_SUPER_ADMIN") %}
+                <li class="nav"><a href="{{ path('admin_user') }}"><i class="fas fa-golf-ball"></i>Golfeurs</a></li>
+                {% endif %}
+                <li class="nav"><a href="{{ path('app_register') }}"><i class="fas fa-golf-ball"></i> Compte</a></li>
                 {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
                     <li class="nav"><a href="{{ path('app_logout') }}"><i class="fas fa-golf-ball"></i> Deconnexion</a></li>
                 {% else %}
                     <li class="nav"><a href="{{ path('app_login') }}"><i class="fas fa-golf-ball"></i> Connexion</a></li>
                 {% endif %}
-                <li class="nav"><a href="{{ path('home') }}"><i class="fas fa-golf-ball"></i> Contact</a></li>
+                <li class="nav"><a href="{{ path('contact') }}"><i class="fas fa-golf-ball"></i> Contact</a></li>
                 <li class="nav"><a href="{{ path('home') }}"><i class="fas fa-golf-ball"></i> CE</a></li>
             </ul>
         </nav>

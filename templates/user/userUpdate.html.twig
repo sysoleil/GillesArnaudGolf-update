@@ -1,10 +1,10 @@
 {% extends 'commons/base.html.twig' %}
 {% block title %}modification compte{% endblock %}
     {% block body %}
+        <meta name="keywords" content="golf, professeur, cours, coach, gilles, arnaud, bordeaux, médoc, gironde, sport"/>
         {% include 'commons/_headerLittle.html.twig' %}
 
-        {#  J'utilise ->  {{ form(userForm) }}  ou pour pouvoir styliser
-je détaille comme ci-dessous   #}
+        {#  Soit {{ form(userForm) }} ou pour styliser je détaille comme ci-dessous  #}
         <main>
             <h1 class="userTitle"> Modifier son compte</h1>
             <section>
@@ -30,7 +30,6 @@ je détaille comme ci-dessous   #}
                     dans la base de symfony dans mon Entité user
 
                     Ensuite je créé @Assert et je mets la contrainte que je souhaite afficher #}
-
                     <div> {{ form_label(userForm.dateBirth) }}
                         {{ form_widget(userForm.dateBirth, {'attr': {'class':'inputDateBirth'}}) }}
                         {{ form_label(userForm.genre) }}
@@ -51,12 +50,6 @@ je détaille comme ci-dessous   #}
                         {{ form_widget(userForm.club, {'attr': {'class': 'inputClub'}}) }}
                     </div>
                     <br>
-                    <div class="w6-half">
-                        {{ form_label(userForm.password) }}
-                        {{ form_widget(userForm.password, {'attr': {'class': 'inputPassword'}}) }}
-                        {{ form_errors(userForm.password)}}
-                        <input class="w6-input w6-border" type="text" placeholder="Répéter votre mot de passe">
-                    </div>
                 </div>
                 <div> {{ form_label(userForm.submit) }}
                     {{ form_widget(userForm.submit, {'attr': {'class':'inputSubmit'}}) }}</div>

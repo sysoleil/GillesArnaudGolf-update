@@ -1,23 +1,25 @@
 {% extends 'commons/base.html.twig' %}
 {% block title %}Connection{% endblock %}
-
 {% block body %}
     <main class="courseMain">
+    <meta name="keywords" content="golf, professeur, cours, coach, gilles, arnaud, bordeaux, médoc, gironde, sport"/>
         {% include 'commons/_headerLittle.html.twig' %}
 
-            <form method="post">
+    <a class="userButtonInsert" href="{{ path('app_register') }}">Créer un compte</a>
+            <form class="tableBigCenter" method="post">
                 {% if error %}
                     <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
                 {% endif %}
 
-                {#   {% if app.user %}
-                    <div class="mb-3">
+                {% if app.user %}
+                    <div class="">
                                  Vous êtes connecté en tant que {{ app.user.username }},
                        <a href="{{ path('app_logout') }}">Se déconnecter</a>
                     </div>
-                {% endif %}#}
-
-                <h1 class="h3 mb-3 font-weight-normal">Veuillez vous connecter</h1>
+                {% endif %}
+                <div class="userConnect">
+                <h1 class="">Veuillez vous connecter</h1>
+                </div>
                     <label for="inputEmail">Email</label>
                     <input type="email" value="{{ last_username }}" name="email"
                            id="inputEmail" class="form-control" required autofocus>
@@ -38,6 +40,6 @@
                     </div>
                 #}
 
-                <button class="btn btn-lg btn-primary" type="submit">Se connecter</button>
+                <button class="" type="submit">Se connecter</button>
             </form>
 {% endblock %}

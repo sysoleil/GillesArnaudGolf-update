@@ -1,27 +1,52 @@
 {% extends 'commons/base.html.twig' %}
 {% block body %}
-    {% include 'commons/_headerLittle.html.twig' %}
-    <div class="formulaireRegister" style="color:white;">
-        {{ form_start(registrationForm) }}
-        <div class="registerMail">
+    <meta name="keywords" content="golf, professeur, cours, coach, gilles, arnaud, bordeaux, médoc, gironde, sport"/>
+          {% include 'commons/_headerLittle.html.twig' %}
+        <div class="formulaireRegister" style="color:white;">
+              {{ form_start(registrationForm) }}
+
+            <div>
+                {{ form_label(registrationForm.firstName) }}
+                {{ form_widget(registrationForm.firstName, {'attr': {'class': 'input_firstName'}}) }}
+                {{ form_errors(registrationForm.firstName) }}
+
+                {{ form_label(registrationForm.lastName) }}
+                {{ form_widget(registrationForm.lastName, {'attr': {'class': 'input_lastName'}}) }}
+                {{ form_errors(registrationForm.lastName) }}
+            </div>
             <div>
                 {{ form_label(registrationForm.email) }}
                 {{ form_widget(registrationForm.email, {'attr': {'class': 'input_email'}}) }}
                 {{ form_errors(registrationForm.email) }}
             </div>
             <div>
-                {{ form_label(registrationForm.password.first) }}
-                {{ form_widget(registrationForm.password.first, {'attr': {'class': 'input_password'}}) }}
-                {{ form_errors(registrationForm.password.first) }}
+                {{ form_label(registrationForm.level) }}
+                {{ form_widget(registrationForm.level, {'attr': {'class': 'input_level'}}) }}
+                {{ form_errors(registrationForm.level) }}
+
+                {{ form_label(registrationForm.club) }}
+                {{ form_widget(registrationForm.club, {'attr': {'class': 'input_club'}}) }}
+                {{ form_errors(registrationForm.club) }}
             </div>
             <div>
-                {{ form_label(registrationForm.password.second) }}
-                {{ form_widget(registrationForm.password.second, {'attr': {'class': 'input_password'}}) }}
-                {{ form_errors(registrationForm.password.second) }}
-
-                {{ form_widget(registrationForm.submit, {'attr': {'class': 'submit'}}) }}
+                {{ form_label(registrationForm.phone) }}
+                {{ form_widget(registrationForm.phone, {'attr': {'class': 'input_phone'}}) }}
+                {{ form_errors(registrationForm.phone) }}
             </div>
-            {{ form_end(registrationForm) }}
+            <div>
+                {{ form_label(registrationForm.genre) }}
+                {{ form_widget(registrationForm.genre, {'attr': {'class': 'input_genre'}}) }}
+                {{ form_errors(registrationForm.genre) }}
+            </div>
+            <div>
+                {{ form_label(registrationForm.password) }}
+                {{ form_widget(registrationForm.password, {'attr': {'class': 'input_password'}}) }}
+                {{ form_errors(registrationForm.password) }}
+
         </div>
+        {{ form_widget(registrationForm.submit, {'attr': {'class': 'submit'}}) }}
+        {{ form_end(registrationForm) }}
+        </div>
+
     </div>
 {% endblock %}

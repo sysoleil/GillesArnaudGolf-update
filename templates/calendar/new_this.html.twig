@@ -1,12 +1,28 @@
 {% extends 'commons/base.html.twig' %}
     {% block body %}
+<main class="courseMain">
+<meta name="keywords" content="golf, professeur, cours, coach, gilles, arnaud, bordeaux, médoc, gironde, sport"/>
+{% extends 'commons/base.html.twig' %}
+    {% block body %}
+        {# <div class="table">
+          {{ include('calendar/_form.html.twig') }}
+         </div>#}
+                    <a class="calendarButtonAccueil" href="{{ path('calendar_index') }}">Retour à l'agenda</a>
         <main class="courseMain">
             {% include 'commons/_headerLittle.html.twig' %}
-                <title>réservation cours golf</title>
-                    <h1 class="calendarTitle">Réserver un cours de golf</h1>
-                        <div class="table">
-                        {{ include('calendar/_form.html.twig') }}
-                        </div>
-                    <a class="calendarButtonAccueil" href="{{ path('calendar_index') }}">Retour à l'agenda</a>
+            <title>réservation cours golf</title>
+                <h1 class="calendarTitle">Réserver un cours de golf</h1>
+            <div class="courseMain">
+                <form action="{{ path('calendar_user') }}" method="get" class="table">
+                    {#value ( elle concerve le champ deja inscrit grace au get )
+                     value = dans le site / dans la request/ dans le query / va chercher le get description#}
+                    <input type="text" name="lastName" placeholder="Par nom"
+                           value="{{ app.request.query.get('lastName') }}">
+                    <input type="submit" value="rechercher">
+                </form>
+                <div class="table">
+                    <a href="{{ path('calendar_index') }}" class="calendarButtonAccueil" >Ajouter une reservation</a>
+                </div>
+            </div>
         </main>
     {% endblock %}
