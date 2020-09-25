@@ -1,0 +1,21 @@
+{% extends 'commons/base.html.twig' %}
+    {% block body %}
+        <main class="courseMain">
+            <meta name="keywords" content="golf, professeur, cours, coach, gilles, arnaud, bordeaux, médoc, gironde, sport"/>
+            {% include 'commons/_headerLittle.html.twig' %}
+                <title>réservation cours golf</title>
+                    <h1 class="calendarTitle">Réserver un cours de golf</h1>
+                        <div class="table tableResponsive">
+                            {{ form_start(calendarForm) }}
+                               <div>
+                                   {{ form_label(calendarForm.title) }}
+                                   {{ form_widget(calendarForm.title, {'attr': {'class':'inputTitle'}}) }}
+                                   {{ form_errors(calendarForm)}}
+                               </div>
+                           {{ form_end(calendarForm) }}
+                        </div>
+                        <div class="calendarDivResponsive">
+                                <a class="calendarButtonLeft" href="{{ path('cal_home') }}">Retour à l'agenda</a>
+                        </div>
+        </main>
+{% endblock %}

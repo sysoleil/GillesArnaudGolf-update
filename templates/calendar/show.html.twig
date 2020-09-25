@@ -1,0 +1,45 @@
+{% extends 'commons/base.html.twig' %}
+{% block title %}Calendrier{% endblock %}
+{% include 'commons/_headerLittle.html.twig' %}
+    {% block body %}
+        <meta name="keywords" content="golf, professeur, cours, coach, gilles, arnaud, bordeaux, médoc, gironde, sport"/>
+        <main class="courseMain">
+            <h1 class="calendarTitle">Calendrier de reservation des cours de Golf</h1>
+                <div>
+                    <table class="table">
+                        <tbody>
+                            <tr>
+                                <th>Golfeur</th>
+                                <td>{{ calendar.title }}</td>
+                            </tr>
+                            <tr>
+                                <th>Début du cours</th>
+                                <td>{{ calendar.start ? calendar.start|date('d-m-Y H:i') : '' }}</td>
+                            </tr>
+                            <tr>
+                                <th>Fin du cours</th>
+                                <td>{{ calendar.end ? calendar.end|date('d-m-Y H:i') : '' }}</td>
+                            </tr>
+                            <tr>
+                                <th>Cours choisi ou indécis</th>
+                                <td>{{ calendar.description }}</td>
+                            </tr>
+                            <tr>
+                                <th>Journée complète</th>
+                                <td>{{ calendar.allDay ? 'oui' : 'Non' }}</td>
+                            </tr>
+                        </tbody>
+
+                            <div>
+                                <a class="button buttonLeft" href="{{ path('calendar_index') }}">Retour à la liste</a>
+                            </div>
+                            <div>
+                                {% if is_granted("ROLE_SUPER_ADMIN") %}
+                                <a class="userButtonUpdate" href="{{ path('calendar_update', {'id': calendar.id}) }}">modifier</a>
+                                {{ include('calendar/_delete_form.html.twig') }}
+                                {% endif %}
+                            </div>
+                    </table>
+                </div>
+    </main>
+{% endblock %}

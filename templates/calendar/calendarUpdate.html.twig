@@ -1,0 +1,23 @@
+{% extends 'commons/base.html.twig' %}
+    {% block body %}
+        <meta name="keywords" content="golf, professeur, cours, coach, gilles, arnaud, bordeaux, médoc, gironde, sport"/>
+            <main class="courseMain">
+                {% include 'commons/_headerLittle.html.twig' %}
+
+                <title>modifier les rendez-vous de golf</title>
+
+                    <h1>modifier un Rdv</h1>
+
+                    <div class="table">
+                        {{ form_start(calendarForm) }}
+                        <div>
+                            {{ form_label(calendarForm.title) }}
+                            {{ form_widget(calendarForm.title, {'attr': {'class':'inputTitle'}}) }}
+                            {{ form_errors(calendarForm)}}
+                        </div>
+                        {{ form_end(calendarForm) }}
+                    </div>
+
+                    <a href="{{ path('calendar_index') }}">retour à la liste</a>
+            </main>
+    {% endblock %}

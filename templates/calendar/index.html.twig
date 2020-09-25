@@ -1,0 +1,57 @@
+{% extends 'commons/base.html.twig' %}
+    {% block body %}
+<main class="courseMain">
+    <meta name="keywords" content="golf, professeur, cours, coach, gilles, arnaud, bordeaux, médoc, gironde, sport"/>
+    {% include 'commons/_headerLittle.html.twig' %}
+
+        <title>calendrier index</title>
+
+            <h1>Cours de golf - Calendrier des réservations</h1>
+
+            <table class="tableBig">
+                <thead>
+                    <tr>
+                        {% if is_granted("ROLE_SUPER_ADMIN") %}
+                        <th>N°</th>
+                        {% endif %}
+                        <th>Golfeur</th>
+                        <th>Début</th>
+                        <th>Fin</th>
+                        <th>Cours choisi ? </th>
+                        <th>Journée complète</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for calendar in calendars %}
+                    <tr>
+                        {% if is_granted("ROLE_SUPER_ADMIN") %}
+                        <td>{{ calendar.id }}</td>
+                        {% endif %}
+                        <td>{{ calendar.title }}</td>
+                        <td>{{ calendar.start ? calendar.start|date('d-m-Y H:i') : '' }}</td>
+                        <td>{{ calendar.end ? calendar.end|date('d-m-Y H:i') : '' }}</td>
+                        <td>{{ calendar.description }}</td>
+                        <td>{{ calendar.allDay ? 'oui' : 'Non' }}</td>
+                        <td>
+                            {% if is_granted("ROLE_SUPER_ADMIN") %}
+                            <a class="button userButtonUpdate" href="{{ path('calendar_show', {'id': calendar.id}) }}">voir</a>
+                        </td>
+                        <td>
+                            <a class="button userButtonUpdate" href="{{ path('calendar_update', {'id': calendar.id}) }}">modifier</a>
+
+                        </td>
+                        <td>
+                            <a class="courseButtonDelete" href="{{ path('calendar_delete', {'id': calendar.id}) }}">supprimer</a>
+                        </td>
+                        {% endif %}
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="7">Aucune réservation de trouvée/td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+         <a class="calendarButtonLeft" href="{{ path('calendar_new') }}">Un nouveau cours ?</a>
+    </main>
+{% endblock %}
