@@ -5,7 +5,6 @@ namespace App\Form;
 use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
@@ -30,21 +29,16 @@ class UserType extends AbstractType
             ->add('lastName', TextType::class,[
                 'label' => "Prénom"
             ])
-            ->add('dateBirth', DateTimeType::class,[
-                'date_widget'=> 'single_text',
-                'label'=> 'date de naissance'
-            ])
-      //      ->add('roles', TextType::class,[
-        //    ])
+        //    ->add('roles', TextType::class,[
+         //   ])
 
             ->add('creditDuration', IntegerType::class,[
                 'label'=> 'Nombre de ticket'
             ])
             ->add('level', TextType::class,[
-                'label' => 'level'
+                'label' => 'index'
             ])
             ->add('club', TextType::class,[
-                'label' => 'club'
             ])
             ->add('phone', TextType::class,[
                 'label' => 'Téléphone'

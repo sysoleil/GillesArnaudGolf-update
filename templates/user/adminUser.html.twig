@@ -9,7 +9,8 @@
                     <div class="userContainer">
                         <a class="" href="{{ path('user_show',{'id':user.id}) }}">
                             <div>{{ user.firstName }} {{ user.lastName }}</div>
-                            <div>Téléphone : {{ user.phone }} - email : {{ user.email }}</div>
+                         {#   <P> {{ user.roles['0'] }}</P> #}
+                            <div>Index : {{ user.level }}</div>
                             {% if user.creditDuration > 0 %}
                                 <div> Solde de tickets non utilisés à ce jour {{ user.creditDuration }}</div>
                             {% endif %}

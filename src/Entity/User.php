@@ -66,11 +66,6 @@ class User implements UserInterface
     private $club;
 
     /**
-     * @ORM\Column(type="date", nullable=true)
-     */
-    private $dateBirth;
-
-    /**
      * @ORM\Column(type="string", nullable=true)
      */
     private $phone;
@@ -236,27 +231,22 @@ class User implements UserInterface
         return $this;
     }
 
-    public function getDateBirth(): ?\DateTimeInterface
-    {
-        return $this->dateBirth;
-    }
 
-    public function setDateBirth(?\DateTimeInterface $dateBirth): self
-    {
-        $this->dateBirth = $dateBirth;
-
-        return $this;
-    }
-
-    public function getPhone(): ?int
+    /**
+     * @return mixed
+     */
+    public function getPhone()
     {
         return $this->phone;
     }
 
-    public function setPhone(?int $phone): self
+    /**
+     * @param mixed $phone
+     * @return User
+     */
+    public function setPhone($phone)
     {
         $this->phone = $phone;
-
         return $this;
     }
 

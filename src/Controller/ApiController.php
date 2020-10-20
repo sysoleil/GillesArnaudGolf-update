@@ -54,7 +54,7 @@ class ApiController extends AbstractController
             // j'instancie un nouveau Rdv
             if (!$calendar) {
                 $calendar = new Calendar;
-                // le code sera alors le 201 pour créé
+                // le code sera alors le 201 pour créer
                 $code = 201;
             }
             // j'hydrate l'objet avec l'ensemble des données

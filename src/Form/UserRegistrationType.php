@@ -25,7 +25,7 @@ class UserRegistrationType extends AbstractType
             ->add('password',RepeatedType::class,[
                 'type' => PasswordType::class,
                 'first_options'  => ['label' => 'Mot de passe'],
-                'second_options' => ['label' => 'Répeter mot de passe'],
+                'second_options' => ['label' => 'Répétez votre mot de passe'],
                 'invalid_message' => 'Les mots de passe ne sont pas identiques',
             ])
             ->add('plainPassword', PasswordType::class, [
@@ -43,6 +43,7 @@ class UserRegistrationType extends AbstractType
                         // Longueur maximale autorisée par Symfony pour des raisons de sécurité
                         'max' => 4096,
                     ]),
+                    'label'=>'Répétez votre mot de passe'
                 ],
                 'required'=> false,
             ])

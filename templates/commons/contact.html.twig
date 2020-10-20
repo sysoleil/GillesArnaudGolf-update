@@ -3,35 +3,35 @@
         <meta name="keywords" content="golf, professeur, cours, coach, gilles, arnaud, bordeaux, médoc, gironde, sport"/>
         {% include 'commons/_headerLittle.html.twig' %}
         <main class="ticketMain">
-                <div class="ticketShowContainer">
-                    {{ form_start(form) }}
-                    <div class="row">
-                        <div class="col">{{ form_row(form.lastName) }}</div>
-                        <div class="col">{{ form_row(form.firstName) }}</div>
+            {% for message in app.flashes('message') %}
+            <div class="alert alert-success" role="alert">
+                {{ message }}
+            </div>
+            {% endfor %}
+            <h1>Me contacter</h1>
+            <div class="contact" style="color:white;">
+                    {{ form_start(contactForm) }}
+                    <div class="registerLine">
+                        {{ form_label(contactForm.lastName) }}
+                        {{ form_widget(contactForm.lastName) }}
+                        {{ form_label(contactForm.firstName) }}
+                        {{ form_widget(contactForm.firstName) }}
                     </div>
-                    <div class="row">
-                        <div class="col">{{ form_row(form.phone) }}</div>
-                        <div class="col">{{ form_row(form.email) }}</div>
+                    <div class="registerLine">
+                        {{ form_label(contactForm.phone) }}
+                        {{ form_widget(contactForm.phone) }}
+                        {{ form_label(contactForm.email) }}
+                        {{ form_widget(contactForm.email) }}
                     </div>
-                    {{ form_rest(form) }}
-                    <div>
-                        <div class="userShowButton"> Envoyer</div>
+                    <div class="contactMessage">
+                        {{ form_label(contactForm.message) }}
+                        {{ form_widget(contactForm.message) }}
                     </div>
-                    {{ form_end(form) }}
-
-                   {# {% for ticketBook in ticketBook %}
-                        <div class="ticketBox">
-                            <h1>{{ ticketBook.name }}</h1>
-                            <p class="ticketShowP"> Nombre d'unités : {{ ticketBook.duration }}</p>
-                            <p class="ticketShowP"> Prix total de : {{ ticketBook.price }} €</p>
-                            <div class="buttonCenter">
-                                <a class="buttonDelete" href="{{ path('ticket_book_show',{'id':ticketBook.id}) }}">supprimer</a>
-                                <a class="button" href="{{ path('ticket_book_update',{'id':ticketBook.id}) }}">modifier</a>
-                                <a class="button" href="">cours acheté</a>
-                            </div>
+                        <div class="buttonCenter">
+                        {{ form_end(contactForm) }}
                         </div>
-                    {% endfor %}  #}
-                    <a class="button buttonLeft" href="{{ path('home') }}">Retour accueil</a>
+
+                    <a class="button registerButtonRight registerButtonResponsive" href="{{ path('home') }}">Retour accueil</a>
                 </div>
         </main>
     {% endblock %}

@@ -605,14 +605,6 @@ div#carousel2 ~ span:hover {
   border-color: #850C35;
 }
 
-.formulaireRegister {
-  text-align: left;
-  margin: 3% auto;
-  color: #422ED9;
-  border-color: #850C35;
-  padding: 8px 180px;
-}
-
 .button {
   padding: 7px 25px;
   background-color: #005B34;
@@ -704,6 +696,13 @@ div#carousel2 ~ span:hover {
   margin: 130px 42px;
 }
 
+.registerButtonRight {
+  position: absolute;
+  right: 10%;
+  bottom: 40%;
+  font-family: "Helvetica Neue", arial;
+}
+
 .registerMail {
   justify-content: left;
   padding-bottom: 15px;
@@ -736,6 +735,45 @@ div#carousel2 ~ span:hover {
 .calendarTitle {
   text-align: center;
   padding-top: 20px;
+}
+
+.contact {
+  width: 100%;
+  margin: 50px auto;
+  padding-left: 300px;
+  text-align: left;
+}
+
+.formulaireRegister {
+  text-align: left;
+  margin: 3% auto;
+  color: #422ED9;
+  border-color: #850C35;
+  padding: 8px 180px;
+}
+
+.formulaireRegisterTitle {
+  display: flex;
+  flex-direction: column;
+  width: 60%;
+  margin: auto;
+  text-align: left;
+  justify-content: space-around;
+}
+
+.registerLine {
+  text-align: left;
+  margin: 15px auto;
+  justify-content: left;
+  padding-bottom: 15px;
+}
+
+.contactMessage {
+  text-align: left;
+  margin: 15px auto;
+  justify-content: left;
+  padding-bottom: 15px;
+  height: 100px;
 }
 
 /*
@@ -1130,6 +1168,12 @@ div#carousel2 ~ span:hover {
 
   .tableResponsive {
     width: 80%;
+  }
+
+  .registerButtonResponsive {
+    margin: auto;
+    -ms-flex-pack: distribute;
+    justify-content: space-around;
   }
 }
 

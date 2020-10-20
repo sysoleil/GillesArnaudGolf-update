@@ -29,10 +29,10 @@ class ContactNotification{
 
     public function notify(Contact $contact){
         $message =(new \Swift_message())
-            -> setFrom('noreply@@lapiscine.pro')
+            -> setFrom('noreply@lapiscine.pro')
             -> setTo('sylvie.ferrer@lapiscine.pro')
             -> setReplyTo($contact->getEmail())
-            -> setBody($this->renderer->render('commons/emailsContact.html.twig',[
+            -> setBody($this->renderer->render('emails/Contact.html.twig',[
                 'contact'=> $contact
             ]), 'text/html');
         $this ->mailer -> send($message);

@@ -5,14 +5,17 @@
         <main class="headUser">
             <section class="userShowDisplay filtreHeader">
                 <div class="userShowContainerhowContainer">
-                    <h1>{{ user.lastName }}</h1>
+                    <h1>{% if user.genre("femme") %} Mme
+                        {% else %} M.
+                        {% endif %}
+                        {{ user.lastName }}  {{ user.firstName }}</h1>
                     <p class="userShowP">
-                        {{ user.firstName }}
+                    <div>Tél. : {{ user.phone }}   -    Email : {{ user.email }}</div>
                     </p>
-                    <p class="userShowP">Level :
-                        {{ user.level }}</p>
-                    <p class="userShowP">Date de naissance :
-                        {{ user.dateBirth }}</p>
+                    <p class="userShowP">Index :  {{ user.level }} -   Club :  {{ user.club }}</p>
+                    {% if user.creditDuration > 0 %}
+                        <div> Solde de tickets non utilisés à ce jour {{ user.creditDuration }}</div>
+                    {% endif %}
                 </div>
             </section>
             <section>

@@ -26,3 +26,37 @@
   text-align: center;
   padding-top: 20px;
 }
+.contact{
+  width: 100%;
+  margin: 50px auto;
+  padding-left: 300px;
+  text-align: left;
+}
+.formulaireRegister{
+  text-align: left;
+  margin: 3% auto;
+  color: $blue;
+  border-color: $red;
+  padding: 8px 180px;
+}
+.formulaireRegisterTitle{
+  display: flex;
+  flex-direction: column;
+  width: 60%;
+  margin: auto;
+  text-align: left;
+  justify-content: space-around;
+}
+.registerLine{
+  text-align: left;
+  margin: 15px auto;
+  justify-content: left;
+  padding-bottom: 15px;
+}
+.contactMessage{
+  text-align: left;
+  margin: 15px auto;
+  justify-content: left;
+  padding-bottom: 15px;
+  height: 100px;
+}

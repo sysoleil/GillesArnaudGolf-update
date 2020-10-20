@@ -109,6 +109,7 @@ class UserController extends AbstractController
      * @param UserRepository $userRepository
      * @param Request $request
      * @param EntityManagerInterface $entityManager
+     * @param MailerInterface $mailer
      * @param $id
      * @return RedirectResponse|Response
      */
@@ -116,6 +117,7 @@ class UserController extends AbstractController
     public function userUpdate(UserRepository $userRepository,
                                Request $request,
                                EntityManagerInterface $entityManager,
+                               MailerInterface $mailer,
                                $id)
         // Je veux récupérer une instance de la variable 'UserRepository $userRepository'
         //J'isntancie dans la variable la class pour récupérer les valeurs requises

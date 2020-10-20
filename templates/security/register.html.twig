@@ -5,7 +5,7 @@
         <div class="formulaireRegister" style="color:white;">
               {{ form_start(registrationForm) }}
 
-            <div>
+            <div class="formulaireRegisterTitle">
                 {{ form_label(registrationForm.firstName) }}
                 {{ form_widget(registrationForm.firstName, {'attr': {'class': 'input_firstName'}}) }}
                 {{ form_errors(registrationForm.firstName) }}
@@ -13,13 +13,19 @@
                 {{ form_label(registrationForm.lastName) }}
                 {{ form_widget(registrationForm.lastName, {'attr': {'class': 'input_lastName'}}) }}
                 {{ form_errors(registrationForm.lastName) }}
-            </div>
-            <div>
+
+                {{ form_label(registrationForm.genre) }}
+                {{ form_widget(registrationForm.genre, {'attr': {'class': 'input_genre'}}) }}
+                {{ form_errors(registrationForm.genre) }}
+
                 {{ form_label(registrationForm.email) }}
                 {{ form_widget(registrationForm.email, {'attr': {'class': 'input_email'}}) }}
                 {{ form_errors(registrationForm.email) }}
-            </div>
-            <div>
+            <p class="registerLine">
+                {{ form_label(registrationForm.phone) }}
+                {{ form_widget(registrationForm.phone, {'attr': {'class': 'input_phone'}}) }}
+                {{ form_errors(registrationForm.phone) }}
+
                 {{ form_label(registrationForm.level) }}
                 {{ form_widget(registrationForm.level, {'attr': {'class': 'input_level'}}) }}
                 {{ form_errors(registrationForm.level) }}
@@ -27,26 +33,16 @@
                 {{ form_label(registrationForm.club) }}
                 {{ form_widget(registrationForm.club, {'attr': {'class': 'input_club'}}) }}
                 {{ form_errors(registrationForm.club) }}
-            </div>
-            <div>
-                {{ form_label(registrationForm.phone) }}
-                {{ form_widget(registrationForm.phone, {'attr': {'class': 'input_phone'}}) }}
-                {{ form_errors(registrationForm.phone) }}
-            </div>
-            <div>
-                {{ form_label(registrationForm.genre) }}
-                {{ form_widget(registrationForm.genre, {'attr': {'class': 'input_genre'}}) }}
-                {{ form_errors(registrationForm.genre) }}
-            </div>
-            <div>
-                {{ form_label(registrationForm.password) }}
+            </p>
+               {{ form_label(registrationForm.password) }}
                 {{ form_widget(registrationForm.password, {'attr': {'class': 'input_password'}}) }}
                 {{ form_errors(registrationForm.password) }}
-
+            </div>
+            <div class="buttonCenter">
+                {{ form_label(registrationForm.submit) }}
+                {{ form_widget(registrationForm.submit, {'attr': {'class': 'submit'}}) }}
+            </div>
+                {{ form_end(registrationForm) }}
+                <a class="button registerButtonRight registerButtonResponsive" href="{{ path('home') }}">Retour accueil</a>
         </div>
-        {{ form_widget(registrationForm.submit, {'attr': {'class': 'submit'}}) }}
-        {{ form_end(registrationForm) }}
-        </div>
-
-    </div>
 {% endblock %}

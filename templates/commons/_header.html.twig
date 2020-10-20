@@ -21,7 +21,9 @@
                 {% endif %}
 
                 <li class="nav"><a href="{{ path('contact') }}"><i class="fas fa-golf-ball"></i> Contact</a></li>
+                {% if is_granted("ROLE_CE") %}
                 <li class="nav"><a href="{{ path('home') }}"><i class="fas fa-golf-ball"></i> CE</a></li>
+                {% endif %}
             </ul>
         </nav>
         <div class="titleHeader">
@@ -53,7 +55,9 @@
                 <li  class=""><a class="" href="{{ path('app_login') }}"><i class="fas fa-golf-ball"></i> Connexion</a></li>
             {% endif %}
             <li  class=""><a class="" href="{{ path('contact') }}"><i class="fas fa-golf-ball"></i> Contact</a></li>
+            {% if is_granted("ROLE_CE") %}
             <li  class=""><a class="" href="{{ path('home') }}"><i class="fas fa-golf-ball"></i> CE</a></li>
+            {% endif %}
         </ul>
         <div class="reponsive titleHeader">
             <div><h1>Gilles ARNAUD enseignement</h1> </div>

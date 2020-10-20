@@ -26,7 +26,7 @@ class CalendarController extends AbstractController
     public function index(CalendarRepository $calendarRepository): Response
     {
         return $this->render('calendar/index.html.twig', [
-            'calendars' => $calendarRepository->findAll(),['start' =>'desc']
+            'calendars' => $calendarRepository->findBy([]),['start' =>'desc']
         ]);
     }
 
@@ -46,7 +46,7 @@ class CalendarController extends AbstractController
         $form->handleRequest($request);
 
         // je pose deux conditions avant de traiter l'information
-        if ($form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted() && $form->isEmpty() && $form->isValid()) {
 
             $entityManager = $this->getDoctrine()->getManager();
             // J'enregistre la nouvelle réservation de cours
@@ -56,7 +56,6 @@ class CalendarController extends AbstractController
 
             return $this->redirectToRoute('cal_home');
         }
-
         return $this->render('calendar/new.html.twig', [
             'calendar' => $calendar,
             'calendarForm' => $form->createView(),

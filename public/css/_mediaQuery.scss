@@ -358,4 +358,10 @@
   .tableResponsive{
     width: 80%;
   }
+  //--------------------------------------    REGISTER responsive   ---------------------------------
+  .registerButtonResponsive{
+    margin: auto;
+    -ms-flex-pack: distribute;
+    justify-content: space-around;
+  }
 }
