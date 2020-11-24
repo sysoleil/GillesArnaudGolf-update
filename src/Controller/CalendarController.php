@@ -5,7 +5,6 @@ namespace App\Controller;
 use App\Entity\Calendar;
 use App\Form\CalendarType;
 use App\Repository\CalendarRepository;
-use App\Repository\UserRepository;
 use Doctrine\ORM\Query\Expr\OrderBy;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -26,7 +25,7 @@ class CalendarController extends AbstractController
     public function index(CalendarRepository $calendarRepository): Response
     {
         return $this->render('calendar/index.html.twig', [
-            'calendars' => $calendarRepository->findBy([]),['start' =>'desc']
+            'calendars' => $calendarRepository->findBy([],['start' =>'DESC'])
         ]);
     }
 
@@ -38,26 +37,32 @@ class CalendarController extends AbstractController
      */
     public function new(Request $request,CalendarRepository $calendarRepository): Response
     {
+
         // j'instancie une nouvelle réservation de cours et je lui donne la variable $reservation
-        $calendar = new Calendar();
+        $reservation = new Calendar();
         // je crée le formulaire à qui je donne la variable $Form
-        $form = $this->createForm(CalendarType::class, $calendar);
+        $form = $this->createForm(CalendarType::class, $reservation);
         //Je prends les données crées et les envoie à mon formulaire
         $form->handleRequest($request);
 
-        // je pose deux conditions avant de traiter l'information
-        if ($form->isSubmitted() && $form->isEmpty() && $form->isValid()) {
+        // je pose 2 conditions avant de traiter l'information
 
-            $entityManager = $this->getDoctrine()->getManager();
-            // J'enregistre la nouvelle réservation de cours
-            $entityManager->persist($calendar);
-            //je sauvegarde la nouvelle donnée
-            $entityManager->flush();
+        if($reservation === null){
+            if ($form->isSubmitted() && $form->isValid()) {
 
-            return $this->redirectToRoute('cal_home');
+                $entityManager = $this->getDoctrine()->getManager();
+                // J'enregistre la nouvelle réservation de cours
+                $entityManager->persist($reservation);
+                //je sauvegarde la nouvelle donnée
+                $entityManager->flush();
+
+                return $this->redirectToRoute('cal_home');
+            }
+        }else{
+            $this->addFlash('message', "Ce créneau n'est pas disponilble");
         }
         return $this->render('calendar/new.html.twig', [
-            'calendar' => $calendar,
+            'calendar' => $reservation,
             'calendarForm' => $form->createView(),
         ]);
     }

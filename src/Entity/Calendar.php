@@ -117,10 +117,6 @@ class Calendar
         return $this;
     }
 
-    public function setTittle($title)
-    {
-    }
-
     public function getUser(): ?User
     {
         return $this->user;

@@ -28,25 +28,7 @@ class UserRegistrationType extends AbstractType
                 'second_options' => ['label' => 'Répétez votre mot de passe'],
                 'invalid_message' => 'Les mots de passe ne sont pas identiques',
             ])
-            ->add('plainPassword', PasswordType::class, [
-                // au lieu d'être directement placé sur l'objet,
-                // il est lu puis encodé dans le controller
-                'mapped' => false,
-                'constraints' => [
-                    // interdiction de laisser vide avec un message d'info
-                    new NotBlank([
-                        'message' => 'Entrer un mot de passe',
-                    ]),
-                    new Length([
-                        'min' => 6,
-                        'minMessage' => 'Votre mot de passe doit faire au moins {{ limit }} de lettres.',
-                        // Longueur maximale autorisée par Symfony pour des raisons de sécurité
-                        'max' => 4096,
-                    ]),
-                    'label'=>'Répétez votre mot de passe'
-                ],
-                'required'=> false,
-            ])
+
             ->add('email', EmailType::class,[
                 'label' => 'eMail'
             ])

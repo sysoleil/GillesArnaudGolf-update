@@ -6,8 +6,11 @@ use App\Entity\Contact;
 use App\Form\ContactType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
+use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\frameworkBundle\swiftmailer;
 
 class ContactController extends AbstractController
 {
@@ -50,4 +53,20 @@ class ContactController extends AbstractController
         'contactForm'=>$form->createView()
     ]);
     }
+
+    /**
+     * @Route("/test-mail")
+     * @param MailerInterface $mailer
+     * @throws TransportExceptionInterface
+     */
+    public function testMail(MailerInterface $mailer)
+    {
+        $mail = (new mail())
+            ->from('microsoft@gmail.com')
+            ->to('sylvie.ferrer@lapiscine.pro')
+            ->subject('confirmation')
+            ->text('Besoin de vous contacter pour un cours.');
+
+        $mailer->send($mail);}
 }
+
