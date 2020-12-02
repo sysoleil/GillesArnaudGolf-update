@@ -1,15 +1,15 @@
 <h1>nouveau contact</h1>
-<div class="formulaireRegister" style="color:palegoldenrod;">
-    <div class="registerLine">
+<div class="formulaireRegister" style="color:#803e8c; line-height: 30px; font-size: 20px">
+    <div class="registerLineContact">
         {{ contact.firstName }}   {{ contact.lastName }}
     </div>
-    <div class="registerLine">
+    <div class="registerLineContact">
         Numéro :{{ contact.phone }}
     </div>
-    <div class="registerLine">
+    <div class="registerLineContact">
         Email :{{ contact.email }}
     </div>
-    <div class="registerLine Msg">
+    <div class="registerLineContact">
         {{ contact.message|raw }}
     </div>
 </div>
