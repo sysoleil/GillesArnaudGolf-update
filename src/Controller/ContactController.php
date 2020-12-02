@@ -4,69 +4,70 @@ namespace App\Controller;
 
 use App\Entity\Contact;
 use App\Form\ContactType;
+use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Mime\Email;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Bundle\frameworkBundle\swiftmailer;
+USE Symfony\Bundle\MonologBundle\SwiftMailer;
 
 class ContactController extends AbstractController
 {
     /**
      * @Route("/contact", name="contact")
-     * @param Request $request
-     * @return Response
+     *
      */
-
-    public function contact(Request $request){
-    $contact = new Contact();
-    $form = $this->createForm(ContactType::class, $contact);
-    $form ->handleRequest($request);
+    public function contact(Request $request, MailerInterface $mailer) {
+        $contact = new Contact();
+        $form = $this->createForm(ContactType::class, $contact);
+        $form ->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $contact = $form->getData();
+            $contactForm = $form->getData();
 
             // ici nous enverrons le mail
-           // $message = (new \Swift_message('Nouveau contact'))
-            // on attribue l'expéditeur
-           // ->setFrom($contact['email'])
+            $message = (new TemplatedEmail())
+            // J'attribue l'expéditeur
+            ->from('sylvieferrerdev@gmail.com')
                 // On attribue le destinataire
-           // ->setTo('sylvieferrer@lapiscine.pro')
-                // on crée le message avec la vue twig
-           // ->setBody(
-                $this->renderView(
-                    'emails/contact.html.twig', compact('contact')
-             //   ),
-             //   'text/html'
-            );
+            ->to('sylvieferrerdev@gmail.com')
+                // JE crée le message avec la vue twig
+            ->htmlTemplate('emails/contact.html.twig')
+            ->context([
+                'contact' => $contact
+            ]);
 
             // on envoie le message
-           // $mailer->send($message);
+            $mailer->send($message);
             $this->addFlash('message', "Votre message a bien été envoyé");
 
             return $this->redirectToRoute('home');
+
         }
 
-    return $this->render('commons/contact.html.twig',[
-        'contactForm'=>$form->createView()
-    ]);
+        return $this->render('commons/contact.html.twig',[
+            'contactForm'=>$form->createView()
+        ]);
     }
 
     /**
      * @Route("/test-mail")
-     * @param MailerInterface $mailer
-     * @throws TransportExceptionInterface
      */
-    public function testMail(MailerInterface $mailer)
+    public function testMail(MailerInterface $email)
     {
-        $mail = (new mail())
-            ->from('microsoft@gmail.com')
-            ->to('sylvie.ferrer@lapiscine.pro')
-            ->subject('confirmation')
-            ->text('Besoin de vous contacter pour un cours.');
+        $e = (new Email())
+            ->from('sylviferrer@gmail.com')
+            ->to('sylviferrer@gmail.com')
+            ->subject('Accusé de réception')
+            ->text('Je vous réponds dès que possible. A bientôt sur les fairways');
 
-        $mailer->send($mail);}
+
+        $email->send($e);
+
+        return new Response('test email');
+    }
 }
 
