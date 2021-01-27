@@ -4,15 +4,17 @@
         <meta name="keywords" content="golf, professeur, cours, coach, gilles, arnaud, bordeaux, médoc, gironde, sport"/>
         {% include 'commons/_headerLittle.html.twig' %}
         <main class="courseMain">
+            {% for media in medias %}
             <div class="courseShowDisplay courseShowDisplayResponsive">
                 <img class="courseShowPhoto courseShowPhotoResponsive" src="{{ asset('upload_directory/' ~ media.photo) }}"
                      alt="{{ media.alt }}" name="{{ media.alt }}">
 
                 <div class="courseShowContainer courseShowContainerResponsive">
                     <h1>{{ media.name }}</h1>
-                    <a href="{{ path('media',{'id':media.id}) }}"><p class="courseShowP courseShowPResponsive">
+                        <a href="{{ path('tuto',{'id':media.id}) }}"><p class="courseShowP courseShowPResponsive">
                             {{ media.description }}</p>
                     </a>
+            {% endfor %}
                     <a class="button buttonLeft buttonResponsive" href="{{ path('home') }}">Retour à l'accueil</a>
                 </div>
             </div>

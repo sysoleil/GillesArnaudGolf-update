@@ -34,7 +34,7 @@ class ContactController extends AbstractController
             ->from('sylvieferrerdev@gmail.com')
                 // On attribue le destinataire
             ->to('sylvieferrerdev@gmail.com')
-            ->subject('Hello')
+            ->subject('Contact via le site')
                 // JE crée le message avec la vue twig
             ->htmlTemplate('emails/contact.html.twig')
             ->context([

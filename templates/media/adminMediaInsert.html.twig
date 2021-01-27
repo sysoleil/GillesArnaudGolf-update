@@ -1,0 +1,62 @@
+{% extends 'commons/base.html.twig' %}
+{% block title %}Création d'un Tuto{% endblock %}
+    {% block body %}
+        <meta name="keywords" content="golf, professeur, cours, coach, gilles, arnaud, bordeaux, médoc, gironde, sport"/>
+        {% include 'commons/_headerLittle.html.twig' %}
+        <h1 class="courseTitle"> Enregistrer un tuto</h1>
+        {#       <div>
+                    {{ form(mediaForm) }} #}
+
+        {# Pour décomposer mon formulaire j'utilise les fonctions form_start() et form_end.
+        qui balisent mon formulaire. Ensuite en fonction des champs j'utilise form_widget() et form_label().
+        Pour le second argument, j'utilise ensuite l'objet 'attr' pour gérer les classes de mes inputs
+        #}
+
+        <div class="formulaireCourse">
+
+            {{ form_start(mediaForm,{'attr':{'class': 'mediaForm'}}) }}
+
+            <div> {{ form_label(mediaForm.name) }}
+                {{ form_widget(mediaForm.name, {'attr': {'class':'inputTitle'}}) }}
+                {{ form_errors(mediaForm)}}
+            </div>
+            {# je crée un label issu du formulaire 'courseForm' je crée un 'widget' ou input
+            et lui attribue une class
+
+            Ensuite je fais une classe dans le CSS #}
+
+            {#  J'active l'affichage des erreurs avec 'form_errors'
+
+            Ensuite je vais dans mon entité Constraints auquel je mets l'alias Assert
+            dans la base de symfony dans mon Entité course
+
+            Ensuite je créé @Assert et je mets la contrainte que je souhaite afficher #}
+        {#    <div> {{ form_label(courseForm.course_style.name) }}<br>
+                {{ form_widget(courseForm.course_style.name, {'attr': {'class':'inputCourseStyle'}}) }}
+            </div>#}
+
+            <div> {{ form_label(mediaForm.description) }}<br>
+                {{ form_widget(mediaForm.description, {'attr': {'class':'inputDescription'}}) }}
+            </div>
+            <div>
+                {{ form_label(mediaForm.photo) }}
+                {{ form_widget(mediaForm.photo, {'attr': {'class': 'inputPhoto'}}) }}
+                {{ form_errors(mediaForm.photo)}}
+            </div>
+            <div>
+                {{ form_label(mediaForm.alt) }}
+                {{ form_widget(mediaForm.alt, {'attr': {'class': 'inputAlt'}}) }}
+                {{ form_errors(mediaForm.alt)}}
+            </div>
+            <div> {{ form_label(mediaForm.submit) }}
+                {{ form_widget(mediaForm.submit, {'attr': {'class':'inputSubmit'}}) }}</div>
+
+            {{ form_end(mediaForm) }}
+        </div>
+        {% for message in app.flashes('info') %}
+            <div class="flashInfo">
+                {{ message }}
+            </div>
+        {% endfor %}
+        <button class="backCenter"><a href="{{ path('home') }}">Retour à l'accueil</a></button>
+    {% endblock %}

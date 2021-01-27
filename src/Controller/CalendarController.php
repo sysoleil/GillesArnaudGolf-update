@@ -59,7 +59,7 @@ class CalendarController extends AbstractController
                 return $this->redirectToRoute('cal_home');
             }
         }else{
-            $this->addFlash('message', "Ce créneau n'est pas disponilble");
+            $this->addFlash('message', "Ce créneau n'est pas disponible");
         }
         return $this->render('calendar/new.html.twig', [
             'calendar' => $reservation,

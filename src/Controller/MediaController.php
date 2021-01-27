@@ -23,12 +23,16 @@ class MediaController extends AbstractController
 
         // je crée ma route pour ma page de tutos
 
-        $media = $mediaRepository->findAll();
+        $medias = $mediaRepository->findAll();
 
         // Je crée ma recherche puis je lui donne une valeur
         return $this->render('media/media.html.twig',[
             // je crée la variable Twig 'media'  que j'irai appeler dans mon fichier Twig Home.html.twig
-            'media' => $media
+            'medias' => $medias
         ]);
     }
+    /**
+     * @Route("/admin/tuto_insert", name="tuto_insert"
+     */
+
 }

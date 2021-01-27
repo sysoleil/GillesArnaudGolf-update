@@ -3,12 +3,7 @@
         <meta name="keywords" content="golf, professeur, cours, coach, gilles, arnaud, bordeaux, médoc, gironde, sport"/>
         {% include 'commons/_headerLittle.html.twig' %}
         <main class="ticketMain">
-            {% for message in app.flashes('message') %}
-            <div class="alert alert-success" role="alert">
-                {{ message }}
-            </div>
-            {% endfor %}
-            <h1>Me contacter</h1>
+            <h1>Vous souhaitez me contacter...</h1>
             <div class="contact" style="color:white;">
                     {{ form_start(contactForm) }}
                     <div class="registerLine">

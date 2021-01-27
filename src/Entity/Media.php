@@ -66,16 +66,20 @@ class Media
         return $this;
     }
 
-    public function getPhoto(): ?string
+    /**
+     * @return mixed
+     */
+    public function getPhoto()
     {
         return $this->photo;
     }
 
-    public function setPhoto(string $photo): self
+    /**
+     * @param mixed $photo
+     */
+    public function setPhoto($photo): void
     {
         $this->photo = $photo;
-
-        return $this;
     }
 
     public function getAlt(): ?string
