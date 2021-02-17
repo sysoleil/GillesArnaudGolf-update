@@ -7,7 +7,7 @@
             <ul class="navContainer">
                 <li class="nav"><a href="{{ path('course') }}"><i class="fas fa-golf-ball"></i> Cours</a></li>
                 <li class="nav"><a href="{{ path('cal_home') }}"><i class="fas fa-golf-ball"></i> Planning</a></li>
-                <li class="nav"><a href="{{ path('tuto') }}"><i class="fas fa-golf-ball"></i> Tutos</a></li>
+                <li class="nav"><a href="{{ path('media') }}"><i class="fas fa-golf-ball"></i> Tutos</a></li>
                 <li class="nav"><a href="{{ path('home') }}"><i class="fas fa-golf-ball"></i> Actualité</a></li>
                 <li class="nav"><a href="{{ path('home') }}"><i class="fas fa-golf-ball"></i> Gallerie</a></li>
                 {% if is_granted("ROLE_SUPER_ADMIN") %}
@@ -27,11 +27,16 @@
             </ul>
         </nav>
         <div class="titleHeader">
+            {% for message in app.flashes('message') %}
+                <div class="alert alert-success" role="alert">
+                    {{ message }}
+                </div>
+            {% endfor %}
             <div><h1>Gilles ARNAUD enseignement</h1> </div>
             <div><h2>Professeur de golf indépendant</h2> </div>
         </div>
         <div class="headerBottom">
-            <p class="headerBottomP">Coach je suis</p>
+            <p class="headerBottomP">je suis votre Coach</p>
         </div>
     </div>
 
@@ -59,12 +64,17 @@
             <li  class=""><a class="" href="{{ path('home') }}"><i class="fas fa-golf-ball"></i> CE</a></li>
             {% endif %}
         </ul>
-        <div class="reponsive titleHeader">
+        <div class="responsive titleHeader">
             <div><h1>Gilles ARNAUD enseignement</h1> </div>
+            {% for message in app.flashes('message') %}
+                <div class="alert alert-success" role="alert">
+                    {{ message }}
+                </div>
+            {% endfor %}
             <div><h2>Professeur de golf indépendant</h2> </div>
         </div>
-        <div class="reponsive headerBottom">
-            <p class="responsive headerBottomP">Coach je suis</p>
+        <div class="responsive headerBottom">
+            <p class="responsive headerBottomP">je suis votre Coach</p>
         </div>
     </div>
 </header>

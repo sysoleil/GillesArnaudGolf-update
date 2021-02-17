@@ -1,0 +1,23 @@
+{% extends 'commons/base.html.twig' %}
+    {% block title %}voir les tutos{% endblock %}
+    {% block body %}
+        <meta name="keywords" content="golf, professeur, cours, coach, gilles, arnaud, bordeaux, médoc, gironde, sport"/>
+        {% include 'commons/_headerLittle.html.twig' %}
+        <main class="courseMain">
+            <div class="courseShowDisplay courseShowDisplayResponsive">
+                <img class="courseShowPhoto courseShowPhotoResponsive" src="{{ asset('upload_directory/' ~ media.photo) }}"
+                     alt="{{ media.alt }}" name="{{ media.alt }}">
+
+                <div class="courseShowContainer courseShowContainerResponsive">
+                    <h1>{{ media.name }}</h1>
+                    <a href="{{ path('media',{'id':media.id}) }}"><p class="courseShowP courseShowPResponsive">
+                            {{ media.description }}</p>
+                    </a>
+                    <p class="courseShowP courseShowPResponsive">
+                        Conseils : {{ media.description }}
+                    </p>
+                    <a class="button buttonLeft buttonResponsive" href="{{ path('home') }}">Retour à l'accueil</a>
+                </div>
+            </div>
+        </main>
+    {% endblock %}

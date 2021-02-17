@@ -33,7 +33,7 @@ class ContactController extends AbstractController
             // J'attribue l'expéditeur
             ->from('sylvieferrerdev@gmail.com')
                 // On attribue le destinataire
-            ->to('sylvieferrerdev@gmail.com')
+            ->to('sylviferrer@gmail.com')
             ->subject('Contact via le site')
                 // JE crée le message avec la vue twig
             ->htmlTemplate('emails/contact.html.twig')
@@ -43,7 +43,7 @@ class ContactController extends AbstractController
 
             // on envoie le message
             $mailer->send($message);
-            $this->addFlash('message', "Votre message a bien été envoyé");
+            $this->addFlash('message', "Je vous réponds dès que possible. A bientôt sur les fairways");
 
             return $this->redirectToRoute('home');
 
@@ -54,21 +54,20 @@ class ContactController extends AbstractController
         ]);
     }
 
-    /**
-     * @Route("/test-mail")
-     */
-    public function testMail(MailerInterface $email)
-    {
-        $e = (new Email())
-            ->from('sylviferrer@gmail.com')
-            ->to('sylviferrer@gmail.com')
-            ->subject('Accusé de réception')
-            ->text('Je vous réponds dès que possible. A bientôt sur les fairways');
+  //   * @Route("/test-mail")
+  //   */
+  //  public function testMail(MailerInterface $email)
+  //  {
+  //      $e = (new Email())
+  //          ->from('sylvieferrerdev@gmail.com')
+  //          ->to('sylvieferrerdev@gmail.com')
+  //          ->subject('Accusé de réception')
+  //          ->text('Je vous réponds dès que possible. A bientôt sur les fairways');
+//
 
+  //      $email->send($e);
 
-        $email->send($e);
-
-        return new Response('test email');
-    }
+   //     return new Response('test email');
+   // }
 }
 

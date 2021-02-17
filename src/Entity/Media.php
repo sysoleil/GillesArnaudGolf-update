@@ -3,7 +3,10 @@
 namespace App\Entity;
 
 use App\Repository\MediaRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=MediaRepository::class)
@@ -18,7 +21,11 @@ class Media
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=150)
+     * @ORM\Column(type="string")
+     * @Assert\Length(min="5",
+     *                max="150",
+     *                minMessage="le titre doit avoir plus de {{ limit }} carractères",
+     *                maxMessage="le titre ne doit pas comporter plus de {{ limit }} carractères")
      */
     private $name;
 

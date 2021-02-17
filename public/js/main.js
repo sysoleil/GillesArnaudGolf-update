@@ -15,3 +15,15 @@ function galleryspin2(sign) {
 }
 
 // ------------------------- suite ----------------------------------------------
+
+// Je définie la valeur
+//const message =
+//    "Je vous réponds dès que possible.";
+
+//document
+ //   .getElementById("contactType")
+ //   .addEventListener("submit", function (event) {
+ //       event.preventDefault();
+ //       alert(message);
+ //   });
+//

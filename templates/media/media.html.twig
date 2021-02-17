@@ -1,4 +1,45 @@
 {% extends 'commons/base.html.twig' %}
+    {% block body %}
+        <main class="courseMain">
+            <meta name="keywords" content="golf, professeur, cours, coach, gilles, arnaud, bordeaux, médoc, gironde, sport"/>
+            {% include 'commons/_headerLittle.html.twig' %}
+            <meta name="keywords" content="golf, professeur, cours, coach, gilles, arnaud, bordeaux, médoc, gironde, sport"/>
+            <h1 class="courseTitle"> LES TUTOS</h1>
+            <div class="">
+                {% if is_granted("ROLE_SUPER_ADMIN") %}
+                    <a class="button" href="{{ path('media_insert') }}">Créer un tuto</a>
+                {% endif %}
+            </div>
+            <section class="courseDisplay">
+                {% for media in medias %}
+                    <div class="courseContainer">
+                        <a href="{{ path('media_show',{'id':media.id}) }}">
+                            <div class="courseHoverContainer courseHoverContainerResponsive">
+                                <img class="coursePhoto" src="{{ asset('upload_directory/' ~ media.photo) }}" alt="{{ media.alt }}" name="{{ media.alt }}"><div class="courseHover courseHoverResponsive">
+                                    <p class="courseTitleSmall">{{ media.name }}
+                                     <a href="{{ path('media_show', {'id': media.id}) }}"></a>
+                                    </p>
+                                </div>
+                                <p class="responsive courseNameResponsive">{{ media.name }}</p>
+                            </div>
+                        </a>
+                        <div>
+                            {% if is_granted("ROLE_SUPER_ADMIN") %}
+                                <a class="button buttonDelete" href="{{ path('media_delete',{'id':media.id}) }}">supprimer</a>
+                                <a class="button" href="{{ path('media_update',{'id':media.id}) }}">modifier</a>
+                            {% endif %}
+                        </div>
+                    </div>
+                {% endfor %}
+            </section>
+            <a class="button buttonLeft buttonResponsive" href="{{ path('home') }}">Retour à l'accueil</a>
+        </main>
+    {% endblock %}
+
+
+
+
+{#{% extends 'commons/base.html.twig' %}
     {% block title %}voir les tutos{% endblock %}
     {% block body %}
         <meta name="keywords" content="golf, professeur, cours, coach, gilles, arnaud, bordeaux, médoc, gironde, sport"/>
@@ -19,4 +60,4 @@
                 </div>
             </div>
         </main>
-    {% endblock %}
+    {% endblock %}#}
