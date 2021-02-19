@@ -10,6 +10,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Validator\Constraints\File;
 
 class MediaType extends AbstractType
 {
@@ -21,8 +22,21 @@ class MediaType extends AbstractType
             ->add('description', TextareaType::class,  [
                 'label'=>'Description'])
             ->add('photo', FileType::class, [
-                'label'=> 'Photo',
-                'mapped'=> false])
+                'label'=> 'sélectionner une Photo',
+                'mapped'=> false,
+                    'constraints'=>[
+                        new File([
+                            //'maxSize' => '1024k',
+                            'mimeTypes' => [
+                                'image/jpeg',
+                                'image/x-jpeg',
+                                'image/png',
+                                'image/x-png',
+                            ],
+                            'mimeTypesMessage' => 'Veuillez choisir une extension valide .jpeg ou .png',
+                        ])
+                    ]
+                ])
             // je créé l'input File, avec en option "mapped => false" pour
             // que symfony n'enregistre pas automatiquement la valeur du champs
             // (comme il le fait sur les autres champs) quand le formulaire est envoyé

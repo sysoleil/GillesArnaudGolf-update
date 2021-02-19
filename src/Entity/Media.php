@@ -30,7 +30,11 @@ class Media
     private $name;
 
     /**
-     * @ORM\Column(type="string", length=1000, nullable=true)
+     * @ORM\Column(type="string", length=5000, nullable=true)
+     * @Assert\Length(min="5",
+     *                max="5000",
+     *                minMessage="la description doit comporter plus de {{ limit }} carractères",
+     *                maxMessage="la description ne doit pas comporter plus de {{ limit }} carractères")
      */
     private $description;
 
