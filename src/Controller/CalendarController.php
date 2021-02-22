@@ -47,7 +47,7 @@ class CalendarController extends AbstractController
 
         // je pose 2 conditions avant de traiter l'information
 
-        if($reservation === null){
+        if($reservation === null) {
             if ($form->isSubmitted() && $form->isValid()) {
 
                 $entityManager = $this->getDoctrine()->getManager();
@@ -57,11 +57,10 @@ class CalendarController extends AbstractController
                 $entityManager->flush();
 
                 return $this->redirectToRoute('cal_home');
+            } else {
+                $this->addFlash('message', "Ce créneau n'est pas disponible");
             }
-        }else{
-            $this->addFlash('message', "Ce créneau n'est pas disponible");
-        }
-        return $this->render('calendar/new.html.twig', [
+        }return $this->render('calendar/new.html.twig', [
             'calendar' => $reservation,
             'calendarForm' => $form->createView(),
         ]);

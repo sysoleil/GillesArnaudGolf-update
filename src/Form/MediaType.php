@@ -32,8 +32,20 @@ class MediaType extends AbstractType
                                 'image/x-jpeg',
                                 'image/png',
                                 'image/x-png',
+                                'video/mpeg',
+                                'video/x-mpeg',
+                                'video/x-quicktime',
+                                'video/quicktime',
+                                'video/ms--wmv',
+                                'video/x-ms-wmv',
+                                'video/msvideo',
+                                'video/x-msvideo',
+                                'video/flv',
+                                'video/x-flv',
+                                'video/mp4',
+                                'video/x-mp4',
                             ],
-                            'mimeTypesMessage' => 'Veuillez choisir une extension valide .jpeg ou .png',
+                            'mimeTypesMessage' => 'Veuillez choisir une extension valide pour les images .jpeg ou .png',
                         ])
                     ]
                 ])

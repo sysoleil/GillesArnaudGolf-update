@@ -10,9 +10,9 @@
 
                 <div class="courseShowContainer courseShowContainerResponsive">
                     <h1>{{ course.name }}</h1>
-                    <a href="{{ path('course',{'id':course.id}) }}"><p class="courseShowP courseShowPResponsive">
+                    {#<a href="{{ path('course',{'id':course.id}) }}">#}<p class="courseShowP courseShowPResponsive">
                         {{ course.description }}</p>
-                    </a>
+                        {#</a>#}
                     <p class="courseShowP courseShowPResponsive">
                         {% if is_granted("ROLE_CE") %}
                             Prix: {{ course.priceCe }}€

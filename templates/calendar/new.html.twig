@@ -17,7 +17,7 @@
                         <div class="calendarDivResponsive">
                                 <a class="calendarButtonLeft" href="{{ path('cal_home') }}">Retour à l'agenda</a>
                         </div>
-            {% for message in app.flashes('message') %}
+            {% for message in app.flashes('success') %}
             <div class="alert alert-success" role="alert">
                 {{ message }}
             </div>

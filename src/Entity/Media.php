@@ -40,6 +40,7 @@ class Media
 
     /**
      * @ORM\Column(type="string", length=150)
+     * @Assert\File(maxSize="250M")
      */
     private $photo;
 
@@ -84,6 +85,11 @@ class Media
     {
         return $this->photo;
     }
+    /**
+     * @Assert
+     *     maxSize = "250M",
+     *     maxSizeMessage="Max. video size: 250MB. "
+     */
 
     /**
      * @param mixed $photo

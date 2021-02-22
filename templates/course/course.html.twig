@@ -15,7 +15,8 @@
                     <div class="courseContainer">
                         <a href="{{ path('course_show',{'id':course.id}) }}">
                             <div class="courseHoverContainer courseHoverContainerResponsive">
-                                <img class="coursePhoto" src="{{ asset('upload_directory/' ~ course.photo) }}" alt="{{ course.alt }}" name="{{ course.alt }}">
+                                <img class="coursePhoto" src="{{ asset('upload_directory/' ~ course.photo) }}"
+                                     alt="{{ course.alt }}" name="{{ course.alt }}">
                                 <div class="courseHover courseHoverResponsive">
                                     <p class="courseTitleSmall">{{ course.name }}
     {#                                    <a href="{{ path('courseShow', {'id': course.id}) }}"></a>#}
