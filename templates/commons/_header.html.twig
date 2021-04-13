@@ -9,7 +9,7 @@
                 <li class="nav"><a href="{{ path('cal_home') }}"><i class="fas fa-golf-ball"></i> Planning</a></li>
                 <li class="nav"><a href="{{ path('media') }}"><i class="fas fa-golf-ball"></i> Tutos</a></li>
                 <li class="nav"><a href="{{ path('home') }}"><i class="fas fa-golf-ball"></i> Actualité</a></li>
-                <li class="nav"><a href="{{ path('home') }}"><i class="fas fa-golf-ball"></i> Gallerie</a></li>
+{#                <li class="nav"><a href="{{ path('home') }}"><i class="fas fa-golf-ball"></i> Gallerie</a></li>#}
                 {% if is_granted("ROLE_SUPER_ADMIN") %}
                     <li class="nav"><a href="{{ path('admin_user') }}"><i class="fas fa-golf-ball"></i>Golfeurs</a></li>
                 {% endif %}
@@ -49,7 +49,7 @@
             <li  class=""><a class="" href="{{ path('cal_home') }}"><i class="fas fa-golf-ball"></i> Planning</a></li>
             <li  class=""><a class="" href="{{ path('home') }}"><i class="fas fa-golf-ball"></i> Tutos</a></li>
             <li class=""><a class="" href="{{ path('home') }}"><i class="fas fa-golf-ball"></i> Actualité</a></li>
-            <li  class=""><a class="" href="{{ path('home') }}"><i class="fas fa-golf-ball"></i> Gallerie</a></li>
+{#            <li  class=""><a class="" href="{{ path('home') }}"><i class="fas fa-golf-ball"></i> Gallerie</a></li>#}
             {% if is_granted("ROLE_SUPER_ADMIN") %}
                 <li class=""><a class="" href="{{ path('admin_user') }}"><i class="fas fa-golf-ball"></i>Golfeurs</a></li>
             {% endif %}

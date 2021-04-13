@@ -151,7 +151,7 @@ class MediaController extends AbstractController
                 return $this->redirectToRoute('media');
             }
         }
-        $this->addFlash('success', 'Votre tuto a bien été modifié');
+        $this->addFlash('info', 'Votre tuto a bien été modifié');
         //J'ajoute un message flash pour confirmer la modif
 
         $form = $mediaForm->createView();

@@ -5,7 +5,6 @@ namespace App\Form;
 use App\Entity\Calendar;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Form\Extension\Core\Type\ColorType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
@@ -22,10 +21,10 @@ class CalendarType extends AbstractType
                 'label'=> 'Votre Nom',
                 'required'=>false])
             ->add('start', DateTimeType::class,[
-                'date_widget' => 'single_text',
+                'time_widget' => 'single_text',
                 'label'=>'début'])
             ->add('end',DateTimeType::class,[
-                'date_widget' => 'single_text',
+                'time_widget' => 'single_text',
                 'label'=> 'fin'])
             ->add('description', TextareaType::class,[
                 'label'=>'cours choisi',

@@ -22,31 +22,30 @@ class MediaType extends AbstractType
             ->add('description', TextareaType::class,  [
                 'label'=>'Description'])
             ->add('photo', FileType::class, [
-                'label'=> 'sélectionner une Photo',
+                'label'=> 'Sélectionner une Photo ou une vidéo',
                 'mapped'=> false,
                     'constraints'=>[
-                        new File([
-                            //'maxSize' => '1024k',
-                            'mimeTypes' => [
-                                'image/jpeg',
-                                'image/x-jpeg',
-                                'image/png',
-                                'image/x-png',
-                                'video/mpeg',
-                                'video/x-mpeg',
-                                'video/x-quicktime',
-                                'video/quicktime',
-                                'video/ms--wmv',
-                                'video/x-ms-wmv',
-                                'video/msvideo',
-                                'video/x-msvideo',
-                                'video/flv',
-                                'video/x-flv',
-                                'video/mp4',
-                                'video/x-mp4',
-                            ],
-                            'mimeTypesMessage' => 'Veuillez choisir une extension valide pour les images .jpeg ou .png',
-                        ])
+                       new File([ 'maxSize' => '1024k',
+                    //        'mimeTypes' => [
+                    //            'image/jpeg',
+                    //            'image/x-jpeg',
+                    //            'image/png',
+                    //            'image/x-png',
+                    //            'video/mpeg',
+                    //            'video/x-mpeg',
+                    //            'video/x-quicktime',
+                    //            'video/quicktime',
+                    //            'video/ms--wmv',
+                    //            'video/x-ms-wmv',
+                    //            'video/msvideo',
+                    //            'video/x-msvideo',
+                    //            'video/flv',
+                    //            'video/x-flv',
+                    //            'video/mp4',
+                    //            'video/x-mp4',
+                    //        ],
+                    //        'mimeTypesMessage' => 'Veuillez choisir une extension valide pour les images .jpeg ou .png',
+                      ])
                     ]
                 ])
             // je créé l'input File, avec en option "mapped => false" pour

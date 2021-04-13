@@ -48,10 +48,10 @@
 
             {{ form_end(mediaForm) }}
         </div>
-        {% for message in app.flashes('info') %}
-            <div class="flashInfo">
-                {{ message }}
-            </div>
-        {% endfor %}
+{#        {% for message in app.flashes('info') %}#}
+{#            <div class="flashInfo" role="alert">#}
+{#                {{ message }}#}
+{#            </div>#}
+{#        {% endfor %}#}
         <button class="backCenter"><a href="{{ path('home') }}">Retour à l'accueil</a></button>
     {% endblock %}

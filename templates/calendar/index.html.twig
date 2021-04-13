@@ -30,7 +30,7 @@
                         <td>{{ calendar.title }}</td>
                         <td>{{ calendar.start ? calendar.start|date('d-m-Y H:i') : '' }}</td>
                         <td>{{ calendar.end ? calendar.end|date('d-m-Y H:i') : '' }}</td>
-                        <td>{{ calendar.description }}</td>
+                        <td>{#<a href="{{ path('calendar_new',{'id':course.id}) }}"></a>#}{{ calendar.description }}</td>
                         <td>{{ calendar.allDay ? 'oui' : 'Non' }}</td>
                         <td>
                             {% if is_granted("ROLE_SUPER_ADMIN") %}

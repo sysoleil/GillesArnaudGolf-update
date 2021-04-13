@@ -5,6 +5,8 @@ namespace App\Controller;
 use App\Entity\Calendar;
 use App\Form\CalendarType;
 use App\Repository\CalendarRepository;
+use App\Repository\CourseRepository;
+use App\Repository\UserRepository;
 use Doctrine\ORM\Query\Expr\OrderBy;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -33,13 +35,20 @@ class CalendarController extends AbstractController
      * @Route("/new", name="calendar_new", methods={"GET","POST"})
      * @param Request $request
      * @param CalendarRepository $calendarRepository
+     * @param UserRepository $userRepository
+     * @param CourseRepository $courseRepository
+//   * @param $id
      * @return Response
      */
-    public function new(Request $request,CalendarRepository $calendarRepository): Response
+    public function new(Request $request, CalendarRepository $calendarRepository,
+                        UserRepository $userRepository, CourseRepository $courseRepository
+                        ): Response
     {
 
         // j'instancie une nouvelle réservation de cours et je lui donne la variable $reservation
         $reservation = new Calendar();
+//      $User = $this -> $User;
+//      $Course = $id;
         // je crée le formulaire à qui je donne la variable $Form
         $form = $this->createForm(CalendarType::class, $reservation);
         //Je prends les données crées et les envoie à mon formulaire
@@ -47,7 +56,7 @@ class CalendarController extends AbstractController
 
         // je pose 2 conditions avant de traiter l'information
 
-        if($reservation === null) {
+        if($reservation !== null) {
             if ($form->isSubmitted() && $form->isValid()) {
 
                 $entityManager = $this->getDoctrine()->getManager();
@@ -69,9 +78,10 @@ class CalendarController extends AbstractController
     /**
      * @Route("/{id}", name="calendar_show", methods={"GET"})
      * @param Calendar $calendar
+     * @param $id
      * @return Response
      */
-    public function show(Calendar $calendar): Response
+    public function show(Calendar $calendar, $id): Response
     {
         return $this->render('calendar/show.html.twig', [
             'calendar' => $calendar,
@@ -82,12 +92,13 @@ class CalendarController extends AbstractController
      * @Route("/{id}/update", name="calendar_update", methods={"GET","POST"})
      * @param Request $request
      * @param Calendar $calendar
+     * @param $id
      * @return Response
      */
     // Je veux récupérer une instance de la variable 'ReservationRepository $reservationRepository'
     //J'isntancie dans la variable la class pour récupérer les valeurs requises
     //Cette méthode Request permet de récupérer les données de la méthode post
-    public function edit(Request $request, Calendar $calendar): Response
+    public function edit(Request $request, Calendar $calendar, $id): Response
     {   // je récupère le gabarit de formulaire de l'entité reservation,
         //  créé  dans la console avec la commande make:form.
         // et je le stocke dans une variable $Form
