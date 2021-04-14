@@ -1,0 +1,37 @@
+{% extends 'commons/base.html.twig' %}
+    {% block body %}
+        <main class="courseMain">
+            <meta name="keywords" content="golf, professeur, cours, coach, gilles, arnaud, bordeaux, médoc, gironde, sport"/>
+            {% include 'commons/_headerLittle.html.twig' %}
+            <meta name="keywords" content="golf, professeur, cours, coach, gilles, arnaud, bordeaux, médoc, gironde, sport"/>
+            <h1 class="courseTitle"> L'ACTUALITE du Moment</h1>
+            <div class="">
+                {% if is_granted("ROLE_SUPER_ADMIN") %}
+                    <a class="button" href="{{ path('actuality_insert') }}">Créer une actualité</a>
+                {% endif %}
+            </div>
+            <section class="courseDisplay">
+                {% for actuality in actualities %}
+                    <div class="courseContainer">
+                       {# <a href="{{ path('actuality_show',{'id':actuality.id}) }}">#}
+                            <div class="courseHoverContainer courseHoverContainerResponsive">
+                                <img class="coursePhoto" src="{{ asset('upload_directory/' ~ actuality.photo) }}" alt="{{ actuality.alt }}" name="{{ actuality.alt }}"><div class="courseHover courseHoverResponsive">
+                                    <p class="courseTitleSmall">{{ actuality.name }}
+                                     {#<a href="{{ path('actuality_show', {'id': actuality.id}) }}"></a>#}
+                                    </p>
+                                </div>
+                                <p class="responsive courseNameResponsive">{{ actuality.name }}</p>
+                            </div>
+                       {# </a>
+                        <div>
+                            {% if is_granted("ROLE_SUPER_ADMIN") %}
+                                <a class="button buttonDelete" href="{{ path('actuality_delete',{'id':actuality.id}) }}">supprimer</a>
+                                <a class="button" href="{{ path('actuality_update',{'id':actuality.id}) }}">modifier</a>
+                            {% endif %}
+                        </div>#}
+                    </div>
+                {% endfor %}
+            </section>
+            <a class="button buttonLeft buttonResponsive" href="{{ path('home') }}">Retour à l'accueil</a>
+        </main>
+    {% endblock %}

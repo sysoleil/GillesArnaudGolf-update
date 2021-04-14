@@ -162,20 +162,20 @@ class MediaController extends AbstractController
             // la vue du formulaire, générée avec la méthode createView()
         ]);
     }
-    /**
-     * @Route("media/show/{id}", name="media_show")
-     * @param MediaRepository $mediaRepository
-     * @param $id
-     * @return Response
-     */
 
-    public function mediaShow(MediaRepository $mediaRepository,
-                              $id)
-    {
-        $media = $mediaRepository->find($id);
-        return $this->render('media/mediaShow.html.twig',[
-            'media' => $media
-            ]);
-    }
+ #   /**
+ #    * @Route("media/show/{id}", name="media_show")
+ #    * @param MediaRepository $mediaRepository
+ #    * @param $id
+ #    * @return Response
+ #    */
 
+#    public function mediaShow(MediaRepository $mediaRepository,
+#                              $id)
+#    {
+#        $media = $mediaRepository->find($id);
+#        return $this->render('media/mediaShow.html.twig',[
+#            'media' => $media
+#            ]);
+#    }
 }
